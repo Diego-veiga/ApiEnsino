@@ -1,8 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import IUsersRepository from '../domain/repositories/IUsersRepository';
-import { ICreateUser } from '../domain/ICreateUsers';
 import { AppError } from '@shared/errors/AppError';
-import { hash } from 'bcryptjs';
 import { IUpdateUser } from '../domain/IUpdateUsers';
 
 @injectable()
