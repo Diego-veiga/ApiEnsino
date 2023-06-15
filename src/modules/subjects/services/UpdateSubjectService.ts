@@ -11,9 +11,9 @@ export default class UpdateSubjectService {
   ) {}
 
   async execute({ id, name, area }: IUpdateSubject): Promise<void> {
-    const userExist = await this.subjectRepository.findById(id);
+    const subjectExist = await this.subjectRepository.findById(id);
 
-    if (!userExist) {
+    if (!subjectExist) {
       throw new AppError('Subject does not exist');
     }
     const existSubjectWithName = await this.subjectRepository.findByName(name);

@@ -19,7 +19,7 @@ describe('Show User Service', () => {
     mockUserRepository.update.mockReset();
     mockUserRepository.delete.mockReset();
   });
-  it('should return empty user ', async () => {
+  it('should return the user ', async () => {
     const user = {
       name: 'abc',
       lastName: 'cde',
