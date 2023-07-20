@@ -22,6 +22,11 @@ export class CreateUnitTable1689761970246 implements MigrationInterface {
             type: 'text',
           },
           {
+            name: 'active',
+            type: 'boolean',
+            default: true,
+          },
+          {
             name: 'create_at',
             type: 'timestamp',
             default: 'now()',

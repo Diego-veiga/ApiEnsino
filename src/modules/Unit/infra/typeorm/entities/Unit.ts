@@ -1,4 +1,4 @@
-import { IUnit } from '@modules/Unit/domain/IUnit';
+import { IUnit } from '@modules/unit/domain/IUnit';
 import {
   Column,
   CreateDateColumn,
@@ -15,6 +15,9 @@ export default class Unit implements IUnit {
   title: string;
   @Column()
   explanation: string;
+
+  @Column({ type: 'bool', default: true })
+  active: boolean;
   @CreateDateColumn()
   create_at: Date;
   @UpdateDateColumn()
