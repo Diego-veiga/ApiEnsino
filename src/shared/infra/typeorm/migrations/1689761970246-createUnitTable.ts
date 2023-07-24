@@ -4,7 +4,7 @@ export class CreateUnitTable1689761970246 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'Unit',
+        name: 'unit',
         columns: [
           {
             name: 'id',
