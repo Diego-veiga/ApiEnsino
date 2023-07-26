@@ -18,6 +18,7 @@ unitRouter.post(
 );
 
 unitRouter.get('/', unitController.index);
+
 unitRouter.get(
   '/:id',
   celebrate({
@@ -26,6 +27,20 @@ unitRouter.get(
     },
   }),
   unitController.show,
+);
+
+unitRouter.put(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      id: Joi.string().guid().required,
+    },
+    [Segments.BODY]: {
+      title: Joi.string().required(),
+      explanation: Joi.string().required(),
+    },
+  }),
+  unitController.update,
 );
 unitRouter.delete(
   '/:id',
