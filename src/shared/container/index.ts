@@ -2,6 +2,8 @@ import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubje
 import ISubjectRepository from '@modules/subjects/domain/respositories/ISubjectsRepository';
 import SubjectsRepository from '@modules/subjects/infra/typeorm/respository/SubjectsRepository';
 import { SubjectToSubjectViewMapper } from '@modules/subjects/mappers/SubjectToSubjectView.mappper';
+import IUnitRepository from '@modules/unit/domain/repository/IUnitRepository';
+import UnitRepository from '@modules/unit/infra/typeorm/repository/UnitRepository';
 import IUserToUserViewMapper from '@modules/users/domain/mappers/IUserToUserView.mapper';
 import IUsersRepository from '@modules/users/domain/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/respositories/UsersRepository';
@@ -18,6 +20,7 @@ container.registerSingleton<IUsersRepository>(
   'UserRepository',
   UsersRepository,
 );
+container.registerSingleton<IUnitRepository>('UnitRepository', UnitRepository);
 
 container.registerSingleton<IUserToUserViewMapper>(
   'UserToUserViewMapper',

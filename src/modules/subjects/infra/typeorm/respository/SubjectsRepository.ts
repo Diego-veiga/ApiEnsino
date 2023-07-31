@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { generatedId } from './../../../../../shared/infra/utils/generateId';
 import { Repository } from 'typeorm';
 import { dataSource } from '@shared/infra/typeorm';
