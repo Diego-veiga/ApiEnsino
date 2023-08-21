@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import User from '@modules/users/infra/typeorm/entities/user';
 import { ICreateUser } from '../ICreateUsers';
 import { IUpdateUser } from '../IUpdateUsers';

@@ -27,7 +27,7 @@ export default class CreateUserSubjects {
     if (!subject) {
       throw new AppError('Subject not found', 403);
     }
-    const userSubject = await this.userSubjectsRepository.getUserAndSubject(
+    const userSubject = await this.userSubjectsRepository.getUserSubject(
       createUserSubjects.userId,
       createUserSubjects.subjectId,
     );

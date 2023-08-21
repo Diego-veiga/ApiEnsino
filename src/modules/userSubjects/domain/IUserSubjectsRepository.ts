@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
 import ICreateUserSubjects from './ICreateUserSubjects';
-import { IUserSubject } from './IUserSubjects';
+import IUpdateUserSubjects from './IUpdateUserSubjects';
+import IUserSubjectView from './UserSubjectView';
 
 export default interface IUserSubjectsRepository {
   create(createUserSubjects: ICreateUserSubjects): Promise<void>;
-  getUserAndSubject(
+  getUserSubject(
     userId: string,
     subjectId: string,
-  ): Promise<IUserSubject | null>;
+  ): Promise<IUserSubjectView | null>;
+  getAll(): Promise<IUserSubjectView[]>;
+  getById(id: string): Promise<IUserSubjectView | null>;
+  delete(id: string): Promise<void>;
+  update(updateUserSubject: IUpdateUserSubjects): Promise<void>;
 }

@@ -9,7 +9,9 @@ import IUsersRepository from '@modules/users/domain/repositories/IUsersRepositor
 import UsersRepository from '@modules/users/infra/typeorm/respositories/UsersRepository';
 import { UserToUserViewMapper } from '@modules/users/mappers/userToUserView.mappper';
 import IUserSubjectsRepository from '@modules/userSubjects/domain/IUserSubjectsRepository';
+import IUserSubjectToUserSubjectViewMapper from '@modules/userSubjects/domain/mappers/IUserSubjectToUserSubjectView';
 import UserSubjectsRepository from '@modules/userSubjects/infra/typeorm/repository/UserSubjectsRepository';
+import UserSubjectViewMapper from '@modules/userSubjects/mappers/userSubjectView.mapper';
 import IRebbit from '@shared/messaging/Interface/IRabbit';
 import Rabbit from '@shared/messaging/Rabbit';
 import { container } from 'tsyringe';
@@ -36,6 +38,11 @@ container.registerSingleton<IUserToUserViewMapper>(
 container.registerSingleton<ISubjectToSubjectViewMapper>(
   'SubjectToSubjectViewMapper',
   SubjectToSubjectViewMapper,
+);
+
+container.registerSingleton<IUserSubjectToUserSubjectViewMapper>(
+  'UserSubjectToUserSubjectViewMapper',
+  UserSubjectViewMapper,
 );
 
 container.registerSingleton<IRebbit>('Rebbit', Rabbit);
