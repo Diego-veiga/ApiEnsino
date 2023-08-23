@@ -1,8 +1,8 @@
-import CreateUserSubjects from '@modules/userSubjects/service/CreateUserSubjectsService';
-import DeleteUserSubjectsService from '@modules/userSubjects/service/DeleteUserSubjectsService';
-import ListUserSubjectsService from '@modules/userSubjects/service/ListUserSubjectsService';
-import ShowUserSubjectsService from '@modules/userSubjects/service/ShowUserSubjectsService';
-import UpdateUserSubjectsService from '@modules/userSubjects/service/UpdateUserSubjectsService';
+import CreateUserSubjects from '@modules/userSubjects/services/CreateUserSubjectsService';
+import DeleteUserSubjectsService from '@modules/userSubjects/services/DeleteUserSubjectsService';
+import ListUserSubjectsService from '@modules/userSubjects/services/ListUserSubjectsService';
+import ShowUserSubjectsService from '@modules/userSubjects/services/ShowUserSubjectsService';
+import UpdateUserSubjectsService from '@modules/userSubjects/services/UpdateUserSubjectsService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
