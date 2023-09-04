@@ -31,6 +31,7 @@ describe('Delete UserSubject Service', () => {
     expect(mockUserSubjectRepository.getById).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.delete).toHaveBeenCalledTimes(1);
   });
+
   it('userSubject not found', async () => {
     const deleteUserSubjectsService = new DeleteUserSubjectsService(
       mockUserSubjectRepository,
