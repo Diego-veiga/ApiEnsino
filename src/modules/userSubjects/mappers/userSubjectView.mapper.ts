@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { classes } from '@automapper/classes';
 import { createMapper, mapFrom } from '@automapper/core';
-import { area } from '@modules/subjects/domain/enum/area';
 import Subject from '@modules/subjects/infra/typeorm/entities/subject';
 import User from '@modules/users/infra/typeorm/entities/user';
 import IUserSubjectToUserSubjectViewMapper from '../domain/mappers/IUserSubjectToUserSubjectView';
+import UserSubjectSubjectView from '../domain/UserSubjectSubjectView';
+import UserSubjectUserView from '../domain/UserSubjectUserView';
 import UserSubjectView from '../domain/UserSubjectView';
 import UserSubjects from '../infra/typeorm/entities/userSubject';
 
@@ -13,17 +14,13 @@ const mapper = createMapper({
   pluginInitializer: classes,
 });
 
-function getUser(user: User): { id: string; name: string } {
+function getUser(user: User): UserSubjectUserView {
   return {
     id: user.id,
     name: user.name,
   };
 }
-function getSubject(subject: Subject): {
-  id: string;
-  name: string;
-  area: area;
-} {
+function getSubject(subject: Subject): UserSubjectSubjectView {
   return {
     id: subject.id,
     name: subject.name,
@@ -44,6 +41,10 @@ mapper
   .forMember(
     dest => dest.subject,
     mapFrom(src => getSubject(src.subject)),
+  )
+  .forMember(
+    dest => dest.grade,
+    mapFrom(src => src.grade),
   )
 
   .forMember(
