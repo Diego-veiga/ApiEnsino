@@ -10,6 +10,7 @@ import { CreateSubject1683401231137 } from './migrations/1683401231137-createSub
 import { AddActiveColumnSubject1683632730291 } from './migrations/1683632730291-addActiveColumnSubject';
 import { CreateUnitTable1689761970246 } from './migrations/1689761970246-createUnitTable';
 import { CreateUserSubject1690888220521 } from './migrations/1690888220521-CreateUserSubject';
+import { CreateLesson1694509633867 } from './migrations/1694509633867-createLesson';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -27,5 +28,6 @@ export const dataSource = new DataSource({
     AddActiveColumnSubject1683632730291,
     CreateUnitTable1689761970246,
     CreateUserSubject1690888220521,
+    CreateLesson1694509633867,
   ],
 });
