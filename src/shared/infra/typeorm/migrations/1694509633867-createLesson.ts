@@ -19,12 +19,18 @@ export class CreateLesson1694509633867 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
+            name: 'description',
+            type: 'text',
+          },
+          {
             name: 'numberQuestions',
             type: 'int',
           },
           {
             name: 'progress',
-            type: 'decimal(10, 2)',
+            type: 'decimal',
+            precision: 10,
+            scale: 2,
             default: 0.0,
           },
           {
@@ -64,7 +70,7 @@ export class CreateLesson1694509633867 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('unit', 'lessonUnit');
+    await queryRunner.dropForeignKey('lesson', 'lessonUnit');
     await queryRunner.dropTable('lesson');
   }
 }
