@@ -1,5 +1,7 @@
+import ILessonToLessonViewMapper from '@modules/lesson/domain/ILessonToLessonViewMapper';
 import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 import LessonRepository from '@modules/lesson/infra/typeorm/repository/LessonRepository';
+import { LessonToLessonViewMapper } from '@modules/lesson/mappers/lessonToLessonView.mapper';
 import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';
 import ISubjectRepository from '@modules/subjects/domain/respositories/ISubjectsRepository';
 import SubjectsRepository from '@modules/subjects/infra/typeorm/respository/SubjectsRepository';
@@ -52,6 +54,11 @@ container.registerSingleton<ISubjectToSubjectViewMapper>(
 container.registerSingleton<IUserSubjectToUserSubjectViewMapper>(
   'UserSubjectToUserSubjectViewMapper',
   UserSubjectViewMapper,
+);
+
+container.registerSingleton<ILessonToLessonViewMapper>(
+  'LessonToLessonViewMapper',
+  LessonToLessonViewMapper,
 );
 
 container.registerSingleton<IRebbit>('Rebbit', Rabbit);

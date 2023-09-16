@@ -16,4 +16,14 @@ lessonRouter.post(
   lessonController.create,
 );
 
+lessonRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().guid().required(),
+    },
+  }),
+  lessonController.delete,
+);
+
 export default lessonRouter;

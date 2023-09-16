@@ -7,6 +7,7 @@ export default interface ILesson {
   progress: number;
   unitId: string;
   unit: Unit;
+  active: boolean;
   create_at: Date;
   update_at: Date;
 }

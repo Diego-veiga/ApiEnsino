@@ -17,8 +17,10 @@ export default class Lesson implements ILesson {
   numberQuestions: number;
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   progress: number;
-  @Column({ type: 'text', default: 0.0 })
+  @Column({ type: 'text', default: '' })
   description: string;
+  @Column({ default: true })
+  active: boolean;
   @Column()
   unitId: string;
   @ManyToOne(() => Unit, unit => unit.lessons)
