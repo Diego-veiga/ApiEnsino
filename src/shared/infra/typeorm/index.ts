@@ -1,3 +1,4 @@
+import Lesson from '@modules/lesson/infra/typeorm/Entities/lesson';
 import Subject from '@modules/subjects/infra/typeorm/entities/subject';
 import Unit from '@modules/unit/infra/typeorm/entities/Unit';
 import User from '@modules/users/infra/typeorm/entities/user';
@@ -19,7 +20,7 @@ export const dataSource = new DataSource({
   username: process.env.USERNAME_DATABASE || 'postgres',
   password: process.env.PASSWORD_DATABASE || '1234',
   database: process.env.DATABASE || 'ApiEnsino',
-  entities: [User, Subject, Unit, UserSubjects],
+  entities: [User, Subject, Unit, UserSubjects, Lesson],
   logging: true,
   migrations: [
     CreateUser1682587596261,

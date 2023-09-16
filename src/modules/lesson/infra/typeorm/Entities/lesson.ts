@@ -15,9 +15,9 @@ export default class Lesson implements ILesson {
   id: string;
   @Column()
   numberQuestions: number;
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
   progress: number;
-  @Column({ type: 'text' })
+  @Column({ type: 'text', default: 0.0 })
   description: string;
   @Column()
   unitId: string;

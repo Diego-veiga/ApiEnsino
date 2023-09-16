@@ -1,3 +1,5 @@
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
+import LessonRepository from '@modules/lesson/infra/typeorm/repository/LessonRepository';
 import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';
 import ISubjectRepository from '@modules/subjects/domain/respositories/ISubjectsRepository';
 import SubjectsRepository from '@modules/subjects/infra/typeorm/respository/SubjectsRepository';
@@ -20,13 +22,20 @@ container.registerSingleton<ISubjectRepository>(
   'SubjectRepository',
   SubjectsRepository,
 );
+
 container.registerSingleton<IUsersRepository>(
   'UserRepository',
   UsersRepository,
 );
+
 container.registerSingleton<IUserSubjectsRepository>(
   'UserSubjectsRepository',
   UserSubjectsRepository,
+);
+
+container.registerSingleton<ILessonRepository>(
+  'LessonRepository',
+  LessonRepository,
 );
 
 container.registerSingleton<IUnitRepository>('UnitRepository', UnitRepository);
