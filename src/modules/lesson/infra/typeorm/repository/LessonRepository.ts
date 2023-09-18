@@ -41,4 +41,21 @@ export default class LessonRepository implements ILessonRepository {
       .where('id = :id', { id: id })
       .execute();
   }
+
+  async getAll(): Promise<LessonView[]> {
+    const lessonsView: LessonView[] = [];
+    const lessonsData = await this.ormRepository.find();
+
+    if (!lessonsData.length) {
+      return lessonsView;
+    }
+
+    for (const lessonData of lessonsData) {
+      lessonsView.push(
+        this.LessonToLessonViewMapper.mapperLessonToLessonView(lessonData),
+      );
+    }
+
+    return lessonsView;
+  }
 }

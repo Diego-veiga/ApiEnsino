@@ -26,4 +26,7 @@ lessonRouter.delete(
   lessonController.delete,
 );
 
+lessonRouter.get('/', lessonController.index);
+lessonRouter.get('/:id', lessonController.show);
+
 export default lessonRouter;
