@@ -45,11 +45,11 @@ export default class LessonController {
     const { description, unitId } = request.body;
     const updateLessonService = container.resolve(UpdateLessonService);
 
-    const lesson = await updateLessonService.execute({
+    await updateLessonService.execute({
       id,
       description,
       unitId,
     });
-    return response.status(200).json(lesson);
+    return response.status(200).json({ message: 'Lesson updated' });
   }
 }

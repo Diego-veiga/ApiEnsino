@@ -29,4 +29,18 @@ lessonRouter.delete(
 lessonRouter.get('/', lessonController.index);
 lessonRouter.get('/:id', lessonController.show);
 
+lessonRouter.put(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().guid().required(),
+    },
+    [Segments.BODY]: {
+      description: Joi.string().required(),
+      unitId: Joi.string().guid().required(),
+    },
+  }),
+  lessonController.update,
+);
+
 export default lessonRouter;

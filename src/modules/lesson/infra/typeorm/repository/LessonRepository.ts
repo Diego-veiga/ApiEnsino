@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import ICreateLesson from '@modules/lesson/domain/ICreateLesson';
 import ILessonToLessonViewMapper from '@modules/lesson/domain/ILessonToLessonViewMapper';
+import IUpdateLesson from '@modules/lesson/domain/IUpdateLesson';
 import LessonView from '@modules/lesson/domain/LessonView';
 import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 import { dataSource } from '@shared/infra/typeorm';
@@ -57,5 +58,17 @@ export default class LessonRepository implements ILessonRepository {
     }
 
     return lessonsView;
+  }
+
+  async update({ id, description, unitId }: IUpdateLesson): Promise<void> {
+    await this.ormRepository
+      .createQueryBuilder()
+      .update(Lesson)
+      .set({
+        description,
+        unitId,
+      })
+      .where('id = :id', { id: id })
+      .execute();
   }
 }
