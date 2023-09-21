@@ -9,10 +9,10 @@ export default class DeleteLessonService {
     @inject('LessonRepository') private lessonRepository: ILessonRepository,
   ) {}
   async execute(id: string): Promise<void> {
-    const unitExist = await this.lessonRepository.getById(id);
+    const lessonExist = await this.lessonRepository.getById(id);
 
-    if (!unitExist) {
-      throw new AppError('Unit does not exist', 400);
+    if (!lessonExist) {
+      throw new AppError('Lesson does not exist', 404);
     }
 
     await this.lessonRepository.delete(id);

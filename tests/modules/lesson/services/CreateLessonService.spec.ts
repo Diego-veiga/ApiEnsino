@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { AppError } from '@shared/errors/AppError';
 import CreateLessonService from '@modules/lesson/services/CreateLessonService';
 
-const mockLessontRepository = {
+const mockLessonRepository = {
   create: jest.fn(),
   getById: jest.fn(),
   getAll: jest.fn(),
@@ -33,17 +33,17 @@ describe('Create Lesson Service', () => {
       unitId: 'any unitId',
     };
     const createLessonService = new CreateLessonService(
-      mockLessontRepository,
+      mockLessonRepository,
       mockUnitRepository,
     );
     mockUnitRepository.getById.mockReturnValue(unit);
 
-    mockLessontRepository.create.mockReturnValue(true);
+    mockLessonRepository.create.mockReturnValue(true);
 
     await createLessonService.execute(lesson);
 
     expect(mockUnitRepository.getById).toHaveBeenCalledTimes(1);
-    expect(mockLessontRepository.create).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.create).toHaveBeenCalledTimes(1);
   });
   it('must not register lesson where unit not exist', async () => {
     const lesson = {
@@ -51,11 +51,11 @@ describe('Create Lesson Service', () => {
       unitId: 'any unitId',
     };
     const createLessonService = new CreateLessonService(
-      mockLessontRepository,
+      mockLessonRepository,
       mockUnitRepository,
     );
     mockUnitRepository.getById.mockReturnValue(null);
-    mockLessontRepository.create.mockReturnValue(true);
+    mockLessonRepository.create.mockReturnValue(true);
 
     await createLessonService.execute(lesson).catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -65,6 +65,6 @@ describe('Create Lesson Service', () => {
     });
 
     expect(mockUnitRepository.getById).toHaveBeenCalledTimes(1);
-    expect(mockLessontRepository.create).toHaveBeenCalledTimes(0);
+    expect(mockLessonRepository.create).toHaveBeenCalledTimes(0);
   });
 });
