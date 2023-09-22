@@ -1,3 +1,4 @@
+import Lesson from '@modules/lesson/infra/typeorm/Entities/lesson';
 import Subject from '@modules/subjects/infra/typeorm/entities/subject';
 import Unit from '@modules/unit/infra/typeorm/entities/Unit';
 import User from '@modules/users/infra/typeorm/entities/user';
@@ -10,6 +11,7 @@ import { CreateSubject1683401231137 } from './migrations/1683401231137-createSub
 import { AddActiveColumnSubject1683632730291 } from './migrations/1683632730291-addActiveColumnSubject';
 import { CreateUnitTable1689761970246 } from './migrations/1689761970246-createUnitTable';
 import { CreateUserSubject1690888220521 } from './migrations/1690888220521-CreateUserSubject';
+import { CreateLesson1694509633867 } from './migrations/1694509633867-createLesson';
 
 export const dataSource = new DataSource({
   type: 'postgres',
@@ -18,7 +20,7 @@ export const dataSource = new DataSource({
   username: process.env.USERNAME_DATABASE || 'postgres',
   password: process.env.PASSWORD_DATABASE || '1234',
   database: process.env.DATABASE || 'ApiEnsino',
-  entities: [User, Subject, Unit, UserSubjects],
+  entities: [User, Subject, Unit, UserSubjects, Lesson],
   logging: true,
   migrations: [
     CreateUser1682587596261,
@@ -27,5 +29,6 @@ export const dataSource = new DataSource({
     AddActiveColumnSubject1683632730291,
     CreateUnitTable1689761970246,
     CreateUserSubject1690888220521,
+    CreateLesson1694509633867,
   ],
 });
