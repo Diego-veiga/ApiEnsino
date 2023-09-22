@@ -1,9 +1,12 @@
 import { area } from '@modules/subjects/domain/enum/area';
 import ISubject from '@modules/subjects/domain/ISubject';
+import { IUserSubject } from '@modules/userSubjects/domain/IUserSubjects';
+import UserSubjects from '@modules/userSubjects/infra/typeorm/entities/userSubject';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -18,6 +21,8 @@ export default class Subject implements ISubject {
   area: area;
   @Column()
   active: boolean;
+  @OneToMany(() => UserSubjects, userSubjects => userSubjects.subject)
+  userSubjects?: IUserSubject[];
   @CreateDateColumn()
   create_at: Date;
   @UpdateDateColumn()
