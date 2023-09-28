@@ -13,7 +13,7 @@ import BaseEntity from '../entities/BaseEntity';
 export default abstract class BaseRepository<T extends BaseEntity>
   implements IBaseRepository<T>
 {
-  private ormRepository: Repository<T>;
+  protected ormRepository: Repository<T>;
 
   constructor(entity: EntityTarget<T>) {
     this.ormRepository = dataSource.getRepository(entity);
@@ -21,8 +21,6 @@ export default abstract class BaseRepository<T extends BaseEntity>
 
   async create(obj: T): Promise<T> {
     const newEntity = this.ormRepository.create(obj);
-    newEntity.id = generatedId();
-
     return await this.ormRepository.save(newEntity);
   }
   async findAll(): Promise<T[]> {

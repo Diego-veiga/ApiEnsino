@@ -1,8 +1,8 @@
 import { classes } from '@automapper/classes';
 import { createMapper, mapFrom } from '@automapper/core';
-import UserView from '../domain/UserView';
 import User from '../infra/typeorm/entities/user';
 import IUserToUserViewMapper from '../domain/mappers/IUserToUserView.mapper';
+import UserView from '../domain/View/UserView';
 
 const mapper = createMapper({
   name: 'mapper',
