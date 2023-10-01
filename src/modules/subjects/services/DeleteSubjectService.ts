@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
 import ISubjectRepository from '../domain/respositories/ISubjectsRepository';
@@ -10,7 +11,7 @@ export default class DeleteSubjectService {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const subjectExist = await this.subjectRepository.findById(id);
+    const subjectExist = await this.subjectRepository.findOne(id);
 
     if (!subjectExist) {
       throw new AppError('Subject does not exist');

@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { area } from '@modules/subjects/domain/enum/area';
-import SubjectView from '@modules/subjects/domain/SubjectView';
+import SubjectView from '@modules/subjects/domain/View/SubjectView';
 import UserView from '@modules/users/domain/UserView';
 import { AppError } from '@shared/errors/AppError';
 import UpdateUserSubjectsService from '@modules/userSubjects/services/UpdateUserSubjectsService';

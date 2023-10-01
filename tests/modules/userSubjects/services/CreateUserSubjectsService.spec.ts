@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 import { area } from '@modules/subjects/domain/enum/area';
-import SubjectView from '@modules/subjects/domain/SubjectView';
-import UserView from '@modules/users/domain/UserView';
+import SubjectView from '@modules/subjects/domain/View/SubjectView';
+
 import CreateUserSubjects from '@modules/userSubjects/services/CreateUserSubjectsService';
 import { AppError } from '@shared/errors/AppError';
+import UserView from '@modules/users/domain/View/UserView';
 
 const mockUserSubjectRepository = {
   create: jest.fn(),

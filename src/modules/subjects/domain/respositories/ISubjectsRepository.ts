@@ -1,13 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 /* eslint-disable no-unused-vars */
-import ICreateSubject from '../ICreateSubject';
-import IUpdateSubject from '../IUpdateSubject';
-import SubjectView from '../SubjectView';
+import Subject from '@modules/subjects/infra/typeorm/entities/subject';
+import IBaseRepository from '@shared/domain/repository/IBaseRepository';
 
-export default interface ISubjectRepository {
-  create(subject: ICreateSubject): Promise<void>;
-  findAll(): Promise<SubjectView[]>;
-  findById(id: string): Promise<SubjectView | null>;
-  findByName(name: string): Promise<SubjectView | null>;
-  delete(id: string): Promise<void>;
-  update(subject: IUpdateSubject): Promise<void>;
+export default interface ISubjectRepository extends IBaseRepository<Subject> {
+  findByName(name: string): Promise<Subject | null>;
 }

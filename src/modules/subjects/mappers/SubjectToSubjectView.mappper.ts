@@ -1,7 +1,7 @@
 import { classes } from '@automapper/classes';
 import { createMapper, mapFrom } from '@automapper/core';
 import Subject from '../infra/typeorm/entities/subject';
-import SubjectView from '../domain/SubjectView';
+import SubjectView from '../domain/View/SubjectView';
 import ISubjectToSubjectViewMapper from '../domain/mappers/ISubjectToSubjectView.mapper';
 
 const mapper = createMapper({

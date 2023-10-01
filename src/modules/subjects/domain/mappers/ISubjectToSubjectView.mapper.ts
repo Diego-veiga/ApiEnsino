@@ -1,5 +1,5 @@
 import ISubject from '../ISubject';
-import SubjectView from '../SubjectView';
+import SubjectView from '../View/SubjectView';
 
 export default interface ISubjectToSubjectViewMapper {
   mapperSubjectToSubjectView(model: ISubject): SubjectView;
