@@ -1,12 +1,8 @@
-/* eslint-disable no-unused-vars */
-import ICreateUnit from '../ICreateUnit';
-import { IUnit } from '../IUnit';
-import IUpdateUnit from '../IUpdateUnit';
+/* eslint-disable @typescript-eslint/no-empty-interface */
 
-export default interface IUnitRepository {
-  save(unit: ICreateUnit): Promise<void>;
-  update(unitUpdate: IUpdateUnit): Promise<void>;
-  getById(id: string): Promise<IUnit | null>;
-  getAll(): Promise<IUnit[]>;
-  delete(id: string): Promise<void>;
-}
+/* eslint-disable no-unused-vars */
+
+import Unit from '@modules/unit/infra/typeorm/entities/Unit';
+import IBaseRepository from '@shared/domain/repository/IBaseRepository';
+
+export default interface IUnitRepository extends IBaseRepository<Unit> {}

@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
-import ICreateUnit from '../domain/ICreateUnit';
+import ICreateUnit from '../domain/Request/ICreateUnit';
 import IUnitRepository from '../domain/repository/IUnitRepository';
+import Unit from '../infra/typeorm/entities/Unit';
 
 @injectable()
 export default class CreateUnitService {
@@ -9,12 +10,12 @@ export default class CreateUnitService {
     @inject('UnitRepository') private unitRepository: IUnitRepository,
   ) {}
 
-  async execute({ title, explanation }: ICreateUnit): Promise<void> {
+  async execute({ title, explanation }: ICreateUnit): Promise<Unit> {
     const newUnit = {
       title,
       explanation,
-    } as ICreateUnit;
+    } as Unit;
 
-    await this.unitRepository.save(newUnit);
+    return await this.unitRepository.create(newUnit);
   }
 }

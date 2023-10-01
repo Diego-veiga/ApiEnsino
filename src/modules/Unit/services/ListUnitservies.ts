@@ -10,6 +10,6 @@ export default class ListUnitService {
   ) {}
 
   async execute(): Promise<IUnit[]> {
-    return await this.unitRepository.getAll();
+    return await this.unitRepository.findAll();
   }
 }
