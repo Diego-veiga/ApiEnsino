@@ -1,8 +1,8 @@
 import 'reflect-metadata';
-import LessonView from '@modules/lesson/domain/LessonView';
+import LessonView from '@modules/lesson/domain/View/LessonView';
 import { AppError } from '@shared/errors/AppError';
 import UpdateLessonService from '@modules/lesson/services/UpdateLessonService';
-import IUpdateLessonRequest from '@modules/lesson/domain/IUpdateLessonRequest';
+import IUpdateLessonRequest from '@modules/lesson/domain/Request/IUpdateLessonRequest';
 
 const mockLessonRepository = {
   create: jest.fn(),

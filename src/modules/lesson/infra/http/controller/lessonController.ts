@@ -12,8 +12,11 @@ export default class LessonController {
 
     const createLessonService = container.resolve(CreateLessonService);
 
-    await createLessonService.execute({ description, unitId });
-    return response.status(201).json({ message: 'Lesson created' });
+    const lessonCreated = await createLessonService.execute({
+      description,
+      unitId,
+    });
+    return response.status(201).json(lessonCreated);
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
@@ -45,11 +48,11 @@ export default class LessonController {
     const { description, unitId } = request.body;
     const updateLessonService = container.resolve(UpdateLessonService);
 
-    await updateLessonService.execute({
+    const lessonUpdated = await updateLessonService.execute({
       id,
       description,
       unitId,
     });
-    return response.status(200).json({ message: 'Lesson updated' });
+    return response.status(200).json(lessonUpdated);
   }
 }

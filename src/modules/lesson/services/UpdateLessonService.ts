@@ -2,35 +2,39 @@
 import IUnitRepository from '@modules/unit/domain/repository/IUnitRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IUpdateLesson from '../domain/IUpdateLesson';
-import IUpdateLessonRequest from '../domain/IUpdateLessonRequest';
-import ILessonRepository from '../domain/repository/ILessonRepository';
+import IUpdateLessonRequest from '../domain/Request/IUpdateLessonRequest';
+import ILessonRepository from '../domain/Repository/ILessonRepository';
+import Lesson from '../infra/typeorm/Entities/lesson';
+import ILessonToLessonViewMapper from '../domain/mappers/ILessonToLessonViewMapper';
+import LessonView from '../domain/View/LessonView';
 
 @injectable()
 export default class UpdateLessonService {
   constructor(
     @inject('LessonRepository') private lessonRepository: ILessonRepository,
     @inject('UnitRepository') private unitRepository: IUnitRepository,
+    @inject('LessonToLessonViewMapper')
+    private lessonToLessonViewMapper: ILessonToLessonViewMapper,
   ) {}
 
   async execute({
     id,
     description,
     unitId,
-  }: IUpdateLessonRequest): Promise<void> {
-    const lessonExist = await this.lessonRepository.getById(id);
+  }: IUpdateLessonRequest): Promise<LessonView> {
+    const lessonExist = await this.lessonRepository.findOne(id);
     if (!lessonExist) {
       throw new AppError('lesson not found', 404);
     }
-    const unitExist = await this.unitRepository.getById(unitId);
+    const unitExist = await this.unitRepository.findOne(unitId);
     if (!unitExist) {
       throw new AppError('unit not found', 404);
     }
-    const lessonUpdate = {
-      id,
-      description,
-      unitId,
-    } as IUpdateLesson;
-    await this.lessonRepository.update(lessonUpdate);
+    lessonExist.description = description;
+    lessonExist.unitId = unitId;
+    const lessonUpdated = await this.lessonRepository.update(lessonExist);
+    return this.lessonToLessonViewMapper.mapperLessonToLessonView(
+      lessonUpdated,
+    );
   }
 }

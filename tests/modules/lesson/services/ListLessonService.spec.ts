@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import ShowLessonService from '@modules/lesson/services/ShowLessonService';
-import LessonView from '@modules/lesson/domain/LessonView';
+import LessonView from '@modules/lesson/domain/View/LessonView';
 import { AppError } from '@shared/errors/AppError';
 import ListLessonService from '@modules/lesson/services/ListLessonService';
 

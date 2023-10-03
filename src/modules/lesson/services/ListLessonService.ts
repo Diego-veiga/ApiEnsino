@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
-import LessonView from '../domain/LessonView';
-import ILessonRepository from '../domain/repository/ILessonRepository';
+import LessonView from '../domain/View/LessonView';
+import ILessonRepository from '../domain/Repository/ILessonRepository';
 
 @injectable()
 export default class ListLessonService {
@@ -9,6 +9,6 @@ export default class ListLessonService {
     @inject('LessonRepository') private lessonRepository: ILessonRepository,
   ) {}
   async execute(): Promise<LessonView[]> {
-    return await this.lessonRepository.getAll();
+    return await this.lessonRepository.findAll();
   }
 }

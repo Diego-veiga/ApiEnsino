@@ -1,5 +1,5 @@
-import ILessonToLessonViewMapper from '@modules/lesson/domain/ILessonToLessonViewMapper';
-import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
+import ILessonToLessonViewMapper from '@modules/lesson/domain/mappers/ILessonToLessonViewMapper';
+import ILessonRepository from '@modules/lesson/domain/Repository/ILessonRepository';
 import LessonRepository from '@modules/lesson/infra/typeorm/repository/LessonRepository';
 import { LessonToLessonViewMapper } from '@modules/lesson/mappers/LessonToLessonView.mapper';
 import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';

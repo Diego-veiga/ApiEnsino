@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { LessonToLessonViewMapper } from '@modules/lesson/mappers/LessonToLessonView.mapper';
 import ILesson from '@modules/lesson/domain/ILesson';
-import LessonView from '@modules/lesson/domain/LessonView';
+import LessonView from '@modules/lesson/domain/View/LessonView';
 
 describe('LessonToLessonViewMapper', () => {
   it('Must return the LessonView', async () => {
