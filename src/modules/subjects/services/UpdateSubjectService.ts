@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
 import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import IUpdateSubject from '../domain/Request/IUpdateSubject';
-import ISubjectToSubjectViewMapper from '../domain/mappers/ISubjectToSubjectView.mapper';
+import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
 import SubjectView from '../domain/View/SubjectView';
 
 @injectable()

@@ -2,7 +2,7 @@
 
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IUnitRepository from '../domain/repository/IUnitRepository';
+import IUnitRepository from '../domain/Respository/IUnitRepository';
 
 @injectable()
 export default class DeleteUnitService {

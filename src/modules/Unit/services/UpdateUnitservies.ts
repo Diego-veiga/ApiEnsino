@@ -2,7 +2,7 @@
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IUpdateUnit from '../domain/Request/IUpdateUnit';
-import IUnitRepository from '../domain/repository/IUnitRepository';
+import IUnitRepository from '../domain/Respository/IUnitRepository';
 import Unit from '../infra/typeorm/entities/Unit';
 
 @injectable()

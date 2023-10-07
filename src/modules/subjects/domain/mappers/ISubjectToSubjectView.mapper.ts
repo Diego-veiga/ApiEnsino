@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import ISubject from '../ISubject';
 import SubjectView from '../View/SubjectView';
 

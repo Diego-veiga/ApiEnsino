@@ -1,4 +1,4 @@
-import IUnitRepository from '@modules/unit/domain/repository/IUnitRepository';
+import IUnitRepository from '@modules/unit/domain/Respository/IUnitRepository';
 import BaseRepository from '@shared/infra/typeorm/repository/BaseRepository';
 
 import Unit from '../entities/Unit';

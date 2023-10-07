@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import IUnitRepository from '@modules/unit/domain/repository/IUnitRepository';
+import IUnitRepository from '@modules/unit/domain/Respository/IUnitRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import ILessonToLessonViewMapper from '../domain/mappers/ILessonToLessonViewMapper';
+import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
 import ILessonRepository from '../domain/Repository/ILessonRepository';
 import IRequestCreateLesson from '../domain/Request/IRequestCreateLesson';
 import LessonView from '../domain/View/LessonView';

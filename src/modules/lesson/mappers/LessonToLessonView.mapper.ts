@@ -1,6 +1,6 @@
 import { classes } from '@automapper/classes';
 import { createMapper, mapFrom } from '@automapper/core';
-import ILessonToLessonViewMapper from '../domain/mappers/ILessonToLessonViewMapper';
+import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
 import ILesson from '../domain/ILesson';
 import LessonView from '../domain/View/LessonView';
 import Lesson from '../infra/typeorm/Entities/lesson';

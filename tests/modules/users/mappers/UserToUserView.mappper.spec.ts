@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { UserToUserViewMapper } from '@modules/users/mappers/userToUserView.mappper';
+import { UserToUserViewMapper } from '@modules/users/Mappers/userToUserView.mappper';
 
 describe('UserToUserViewMapper', () => {
   it('Must return the UserView', async () => {

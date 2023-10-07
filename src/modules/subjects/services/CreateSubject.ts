@@ -4,7 +4,7 @@ import { AppError } from '@shared/errors/AppError';
 import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import ICreateSubject from '../domain/Request/ICreateSubject';
 import Subject from '../infra/typeorm/entities/subject';
-import ISubjectToSubjectViewMapper from '../domain/mappers/ISubjectToSubjectView.mapper';
+import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
 import SubjectView from '../domain/View/SubjectView';
 
 @injectable()
