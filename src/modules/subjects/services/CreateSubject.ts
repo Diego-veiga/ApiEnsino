@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
-import ISubjectRepository from '../domain/respositories/ISubjectsRepository';
+import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import ICreateSubject from '../domain/Request/ICreateSubject';
 import Subject from '../infra/typeorm/entities/subject';
 import ISubjectToSubjectViewMapper from '../domain/mappers/ISubjectToSubjectView.mapper';

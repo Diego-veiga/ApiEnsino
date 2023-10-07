@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IUsersRepository from '@modules/users/domain/repositories/IUsersRepository';
+import IUsersRepository from '@modules/users/domain/Repository/IUsersRepository';
 import User from '../entities/user';
 import { injectable } from 'tsyringe';
 import BaseRepository from '@shared/infra/typeorm/repository/BaseRepository';

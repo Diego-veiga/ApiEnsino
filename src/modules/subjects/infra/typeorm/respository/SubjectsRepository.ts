@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import ISubjectRepository from '@modules/subjects/domain/respositories/ISubjectsRepository';
+import ISubjectRepository from '@modules/subjects/domain/Repository/ISubjectsRepository';
 import Subject from '../entities/subject';
 import BaseRepository from '@shared/infra/typeorm/repository/BaseRepository';
 

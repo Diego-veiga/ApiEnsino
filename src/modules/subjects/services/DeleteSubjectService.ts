@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
-import ISubjectRepository from '../domain/respositories/ISubjectsRepository';
+import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 
 @injectable()
 export default class DeleteSubjectService {

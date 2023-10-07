@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
-import IUsersRepository from '../domain/repositories/IUsersRepository';
+import IUsersRepository from '../domain/Repository/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
 import { IUpdateUser } from '../domain/Request/IUpdateUsers';
 import { hash } from 'bcryptjs';

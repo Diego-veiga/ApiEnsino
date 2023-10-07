@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import IUsersRepository from '../domain/repositories/IUsersRepository';
+import IUsersRepository from '../domain/Repository/IUsersRepository';
 import UserView from '../domain/UserView';
 
 @injectable()
