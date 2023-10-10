@@ -6,28 +6,25 @@ import IUpdateLessonRequest from '@modules/lesson/domain/Request/IUpdateLessonRe
 
 const mockLessonRepository = {
   create: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
 };
 
 const mockUnitRepository = {
-  save: jest.fn(),
-  update: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  create: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
+  update: jest.fn(),
+};
+
+const mockLessonToLessonViewMapper = {
+  mapperLessonToLessonView: jest.fn(),
 };
 
 describe('Update Lesson Service', () => {
-  beforeAll(() => {
-    mockLessonRepository.getAll.mockReset();
-    mockLessonRepository.getById.mockReset();
-    mockLessonRepository.create.mockReset();
-    mockLessonRepository.update.mockReset();
-    mockLessonRepository.delete.mockReset();
-  });
   it('must return the list lesson', async () => {
     const lesson = {
       id: 'any id',
@@ -39,6 +36,7 @@ describe('Update Lesson Service', () => {
       create_at: new Date(),
       update_at: new Date(),
     } as LessonView;
+
     const unit = {
       id: 'any id',
       title: 'any title',
@@ -56,15 +54,23 @@ describe('Update Lesson Service', () => {
     const updateLessonService = new UpdateLessonService(
       mockLessonRepository,
       mockUnitRepository,
+      mockLessonToLessonViewMapper,
     );
-    mockLessonRepository.getById.mockReturnValue(lesson);
-    mockUnitRepository.getById.mockReturnValue(unit);
+
+    mockLessonToLessonViewMapper.mapperLessonToLessonView.mockReturnValue(
+      lesson,
+    );
+    mockLessonRepository.findOne.mockReturnValue(lesson);
+    mockUnitRepository.findOne.mockReturnValue(unit);
 
     await updateLessonService.execute(updateLessonRequest);
 
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
-    expect(mockUnitRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUnitRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockLessonRepository.update).toHaveBeenCalledTimes(1);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(1);
   });
 
   it('try update lesson with unit not exist', async () => {
@@ -88,10 +94,12 @@ describe('Update Lesson Service', () => {
     const updateLessonService = new UpdateLessonService(
       mockLessonRepository,
       mockUnitRepository,
+      mockLessonToLessonViewMapper,
     );
 
-    mockLessonRepository.getById.mockReturnValue(lesson);
-    mockUnitRepository.getById.mockReturnValue(undefined);
+    mockLessonRepository.findOne.mockReturnValue(lesson);
+    mockUnitRepository.findOne.mockReturnValue(undefined);
+    mockLessonToLessonViewMapper.mapperLessonToLessonView.mockReturnValue(null);
 
     await updateLessonService.execute(updateLessonRequest).catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -99,9 +107,12 @@ describe('Update Lesson Service', () => {
         message: 'unit not found',
       });
     });
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
-    expect(mockUnitRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUnitRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockLessonRepository.update).toHaveBeenCalledTimes(0);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(0);
   });
 
   it('try update lesson not exist', async () => {
@@ -114,10 +125,12 @@ describe('Update Lesson Service', () => {
     const updateLessonService = new UpdateLessonService(
       mockLessonRepository,
       mockUnitRepository,
+      mockLessonToLessonViewMapper,
     );
 
-    mockLessonRepository.getById.mockReturnValue(undefined);
-    mockUnitRepository.getById.mockReturnValue(undefined);
+    mockLessonRepository.findOne.mockReturnValue(undefined);
+    mockUnitRepository.findOne.mockReturnValue(undefined);
+    mockLessonToLessonViewMapper.mapperLessonToLessonView.mockReturnValue(null);
 
     await updateLessonService.execute(updateLessonRequest).catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -125,8 +138,11 @@ describe('Update Lesson Service', () => {
         message: 'lesson not found',
       });
     });
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
-    expect(mockUnitRepository.getById).toHaveBeenCalledTimes(0);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockUnitRepository.findOne).toHaveBeenCalledTimes(0);
     expect(mockLessonRepository.update).toHaveBeenCalledTimes(0);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(0);
   });
 });

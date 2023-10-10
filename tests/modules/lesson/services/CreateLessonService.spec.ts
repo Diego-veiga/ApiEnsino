@@ -17,6 +17,7 @@ const mockUnitRepository = {
   delete: jest.fn(),
   update: jest.fn(),
 };
+
 const mockLessonToLessonViewMapper = {
   mapperLessonToLessonView: jest.fn(),
 };
