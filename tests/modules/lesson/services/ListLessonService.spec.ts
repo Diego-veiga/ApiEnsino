@@ -1,27 +1,22 @@
 import 'reflect-metadata';
-import ShowLessonService from '@modules/lesson/services/ShowLessonService';
 import LessonView from '@modules/lesson/domain/View/LessonView';
-import { AppError } from '@shared/errors/AppError';
 import ListLessonService from '@modules/lesson/services/ListLessonService';
 
 const mockLessonRepository = {
   create: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
 };
 
+const mockLessonToLessonViewMapper = {
+  mapperLessonToLessonView: jest.fn(),
+};
+
 describe('List Lesson Service', () => {
-  beforeAll(() => {
-    mockLessonRepository.getAll.mockReset();
-    mockLessonRepository.getById.mockReset();
-    mockLessonRepository.create.mockReset();
-    mockLessonRepository.update.mockReset();
-    mockLessonRepository.delete.mockReset();
-  });
   it('must return the list lesson', async () => {
-    const lesson = [
+    const lessons = [
       {
         id: 'any id',
         description: 'any description',
@@ -44,25 +39,39 @@ describe('List Lesson Service', () => {
       },
     ] as LessonView[];
 
-    const listLessonService = new ListLessonService(mockLessonRepository);
-    mockLessonRepository.getAll.mockReturnValue(lesson);
+    const listLessonService = new ListLessonService(
+      mockLessonRepository,
+      mockLessonToLessonViewMapper,
+    );
+    mockLessonRepository.findAll.mockReturnValue(lessons);
+    mockLessonToLessonViewMapper.mapperLessonToLessonView.mockReturnValue(
+      lessons[0],
+    );
 
     const result = await listLessonService.execute();
 
-    expect(mockLessonRepository.getAll).toHaveBeenCalledTimes(1);
-    expect(result).toEqual(lesson);
+    expect(mockLessonRepository.findAll).toHaveBeenCalledTimes(1);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(2);
+    expect(result).toEqual(lessons);
   });
 
   it('should return empty lesson', async () => {
-    const showLessonService = new ShowLessonService(mockLessonRepository);
-    mockLessonRepository.getById.mockReturnValue(undefined);
+    mockLessonRepository.findAll.mockReturnValue(undefined);
 
-    await showLessonService.execute('2').catch(e => {
-      expect(e).toBeInstanceOf(AppError);
-      expect(e).toMatchObject({
-        message: 'lesson not found',
-      });
-    });
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
+    const listLessonService = new ListLessonService(
+      mockLessonRepository,
+      mockLessonToLessonViewMapper,
+    );
+    mockLessonRepository.findAll.mockReturnValue([]);
+
+    const result = await listLessonService.execute();
+
+    expect(mockLessonRepository.findAll).toHaveBeenCalledTimes(1);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(0);
+    expect(result).toEqual([]);
   });
 });

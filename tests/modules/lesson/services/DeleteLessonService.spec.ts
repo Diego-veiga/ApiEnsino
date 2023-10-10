@@ -4,8 +4,8 @@ import { AppError } from '@shared/errors/AppError';
 
 const mockLessonRepository = {
   create: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
 };
@@ -13,7 +13,7 @@ const mockLessonRepository = {
 describe('DeleteLessonService', () => {
   it('should delete lesson', async () => {
     const deleteLessonService = new DeleteLessonService(mockLessonRepository);
-    mockLessonRepository.getById.mockReturnValue({
+    mockLessonRepository.findOne.mockReturnValue({
       id: 'any id',
       title: 'any title',
       explanation: 'any explanation',
@@ -23,13 +23,13 @@ describe('DeleteLessonService', () => {
 
     await deleteLessonService.execute('any id');
 
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockLessonRepository.delete).toHaveBeenCalledTimes(1);
   });
 
   it('delete Lesson not existing ', async () => {
     const deleteLessonService = new DeleteLessonService(mockLessonRepository);
-    mockLessonRepository.getById.mockReturnValue(null);
+    mockLessonRepository.findOne.mockReturnValue(null);
 
     await deleteLessonService.execute('any id').catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -38,7 +38,7 @@ describe('DeleteLessonService', () => {
       });
     });
 
-    expect(mockLessonRepository.getById).toBeCalledTimes(1);
+    expect(mockLessonRepository.findOne).toBeCalledTimes(1);
     expect(mockLessonRepository.update).toBeCalledTimes(0);
   });
 });

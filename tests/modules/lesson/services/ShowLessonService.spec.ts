@@ -5,20 +5,17 @@ import { AppError } from '@shared/errors/AppError';
 
 const mockLessonRepository = {
   create: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
 };
 
+const mockLessonToLessonViewMapper = {
+  mapperLessonToLessonView: jest.fn(),
+};
+
 describe('Show Lesson Service', () => {
-  beforeAll(() => {
-    mockLessonRepository.getAll.mockReset();
-    mockLessonRepository.getById.mockReset();
-    mockLessonRepository.create.mockReset();
-    mockLessonRepository.update.mockReset();
-    mockLessonRepository.delete.mockReset();
-  });
   it('must return the lesson', async () => {
     const lesson = {
       id: 'any id',
@@ -31,18 +28,30 @@ describe('Show Lesson Service', () => {
       update_at: new Date(),
     } as LessonView;
 
-    const showLessonService = new ShowLessonService(mockLessonRepository);
-    mockLessonRepository.getById.mockReturnValue(lesson);
+    const showLessonService = new ShowLessonService(
+      mockLessonRepository,
+      mockLessonToLessonViewMapper,
+    );
+    mockLessonRepository.findOne.mockReturnValue(lesson);
+    mockLessonToLessonViewMapper.mapperLessonToLessonView.mockReturnValue(
+      lesson,
+    );
 
     const result = await showLessonService.execute('1');
 
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(1);
     expect(result).toEqual(lesson);
   });
 
   it('should return empty lesson', async () => {
-    const showLessonService = new ShowLessonService(mockLessonRepository);
-    mockLessonRepository.getById.mockReturnValue(undefined);
+    const showLessonService = new ShowLessonService(
+      mockLessonRepository,
+      mockLessonToLessonViewMapper,
+    );
+    mockLessonRepository.findOne.mockReturnValue(undefined);
 
     await showLessonService.execute('2').catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -50,6 +59,9 @@ describe('Show Lesson Service', () => {
         message: 'lesson not found',
       });
     });
-    expect(mockLessonRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockLessonRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(
+      mockLessonToLessonViewMapper.mapperLessonToLessonView,
+    ).toHaveBeenCalledTimes(0);
   });
 });
