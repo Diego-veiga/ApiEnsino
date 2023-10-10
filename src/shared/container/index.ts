@@ -4,7 +4,7 @@ import LessonRepository from '@modules/lesson/infra/typeorm/repository/LessonRep
 import { LessonToLessonViewMapper } from '@modules/lesson/mappers/LessonToLessonView.mapper';
 import ISubjectToSubjectViewMapper from '@modules/subjects/domain/Mappers/ISubjectToSubjectView.mapper';
 import ISubjectRepository from '@modules/subjects/domain/Repository/ISubjectsRepository';
-import SubjectsRepository from '@modules/subjects/infra/typeorm/respository/SubjectsRepository';
+import SubjectsRepository from '@modules/subjects/infra/typeorm/repository/SubjectsRepository';
 import { SubjectToSubjectViewMapper } from '@modules/subjects/mappers/SubjectToSubjectView.mappper';
 import IUnitRepository from '@modules/unit/domain/Respository/IUnitRepository';
 import UnitRepository from '@modules/unit/infra/typeorm/repository/UnitRepository';
