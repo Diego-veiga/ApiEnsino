@@ -1,18 +1,19 @@
 import 'reflect-metadata';
 import UpdateUnitService from '@modules/unit/services/UpdateUnitservies';
 import { AppError } from '@shared/errors/AppError';
+const mockUnitRepository = {
+  create: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
+  delete: jest.fn(),
+  update: jest.fn(),
+  findByName: jest.fn(),
+};
 
 describe('Update Unit Service ', () => {
-  const mockUnitRepository = {
-    save: jest.fn(),
-    update: jest.fn(),
-    getById: jest.fn(),
-    getAll: jest.fn(),
-    delete: jest.fn(),
-  };
   it('update Unit successfully', async () => {
     const updateUnitService = new UpdateUnitService(mockUnitRepository);
-    mockUnitRepository.getById.mockReturnValue({
+    mockUnitRepository.findOne.mockReturnValue({
       id: 'anu id',
       title: 'any update',
       explanation: 'any explanation',
@@ -25,13 +26,13 @@ describe('Update Unit Service ', () => {
       explanation: 'any explanation',
     });
 
-    expect(mockUnitRepository.getById).toBeCalledTimes(1);
+    expect(mockUnitRepository.findOne).toBeCalledTimes(1);
     expect(mockUnitRepository.update).toBeCalledTimes(1);
   });
 
   it('update Unit not existing ', async () => {
     const updateUnitService = new UpdateUnitService(mockUnitRepository);
-    mockUnitRepository.getById.mockReturnValue(null);
+    mockUnitRepository.findOne.mockReturnValue(null);
 
     await updateUnitService
       .execute({
@@ -46,7 +47,7 @@ describe('Update Unit Service ', () => {
         });
       });
 
-    expect(mockUnitRepository.getById).toBeCalledTimes(1);
+    expect(mockUnitRepository.findOne).toBeCalledTimes(1);
     expect(mockUnitRepository.update).toBeCalledTimes(0);
   });
 });
