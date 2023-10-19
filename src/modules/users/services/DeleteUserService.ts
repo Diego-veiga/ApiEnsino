@@ -11,7 +11,7 @@ export default class DeleteUserService {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const userExist = await this.userRepository.findById(id);
+    const userExist = await this.userRepository.findOne(id);
 
     if (!userExist) {
       throw new AppError('User does not exist');

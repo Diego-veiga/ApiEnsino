@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import IBaseRepository from '@shared/domain/repository/IBaseRepository';
-import { generatedId } from '@shared/infra/utils/generateId';
 import {
   DeepPartial,
   EntityTarget,
