@@ -4,11 +4,12 @@ import DeleteUserService from '@modules/users/services/DeleteUserService';
 
 const mockUserRepository = {
   create: jest.fn(),
-  delete: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByEmail: jest.fn(),
+  findOne: jest.fn(),
+  delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+  findByEmail: jest.fn(),
 };
 
 describe('Delete User Service', () => {
@@ -20,17 +21,18 @@ describe('Delete User Service', () => {
       password: '123',
     };
     const deleteUserService = new DeleteUserService(mockUserRepository);
-    mockUserRepository.findById.mockReturnValue(userDeleted);
+    mockUserRepository.findOne.mockReturnValue(userDeleted);
     mockUserRepository.delete.mockReturnValue(true);
 
     await deleteUserService.execute('1');
 
-    expect(mockUserRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserRepository.delete).toHaveBeenCalledTimes(1);
   });
+
   it('user not found', async () => {
     const deleteUserService = new DeleteUserService(mockUserRepository);
-    mockUserRepository.findById.mockReturnValue(null);
+    mockUserRepository.findOne.mockReturnValue(null);
 
     await deleteUserService.execute('1').catch(e => {
       expect(e).toBeInstanceOf(AppError);
