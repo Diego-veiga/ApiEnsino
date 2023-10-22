@@ -4,11 +4,12 @@ import DeleteUserSubjectsService from '@modules/userSubjects/services/DeleteUser
 
 const mockUserSubjectRepository = {
   create: jest.fn(),
-  getUserSubject: jest.fn(),
-  getAll: jest.fn(),
-  getById: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  getAllUserSubject: jest.fn(),
+  getUserSubject: jest.fn(),
 };
 
 describe('Delete UserSubject Service', () => {
@@ -23,12 +24,12 @@ describe('Delete UserSubject Service', () => {
     const deleteUserSubjectsService = new DeleteUserSubjectsService(
       mockUserSubjectRepository,
     );
-    mockUserSubjectRepository.getById.mockReturnValue(userDeleted);
+    mockUserSubjectRepository.findOne.mockReturnValue(userDeleted);
     mockUserSubjectRepository.delete.mockReturnValue(true);
 
     await deleteUserSubjectsService.execute('1');
 
-    expect(mockUserSubjectRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockUserSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.delete).toHaveBeenCalledTimes(1);
   });
 
@@ -36,7 +37,7 @@ describe('Delete UserSubject Service', () => {
     const deleteUserSubjectsService = new DeleteUserSubjectsService(
       mockUserSubjectRepository,
     );
-    mockUserSubjectRepository.getById.mockReturnValue(null);
+    mockUserSubjectRepository.findOne.mockReturnValue(null);
 
     await deleteUserSubjectsService.execute('1').catch(e => {
       expect(e).toBeInstanceOf(AppError);

@@ -8,29 +8,35 @@ import UserView from '@modules/users/domain/View/UserView';
 
 const mockUserSubjectRepository = {
   create: jest.fn(),
-  getUserSubject: jest.fn(),
-  getAll: jest.fn(),
-  getById: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  getAllUserSubject: jest.fn(),
+  getUserSubject: jest.fn(),
 };
 
 const mockUserRepository = {
   create: jest.fn(),
-  delete: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByEmail: jest.fn(),
+  findOne: jest.fn(),
+  delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+  findByEmail: jest.fn(),
 };
 
 const mockSubjectRepository = {
   create: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByName: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+};
+
+const mockUserSubjectToUserSubjectViewMapper = {
+  mapperUserSubjectToUserSubjectView: jest.fn(),
 };
 
 describe('CreateUserSubjectsService', () => {
@@ -54,14 +60,15 @@ describe('CreateUserSubjectsService', () => {
       updateDate: new Date(),
     } as SubjectView;
 
-    mockUserRepository.findById.mockReturnValue(userMockModel);
-    mockSubjectRepository.findById.mockReturnValue(subjectMockModel);
+    mockUserRepository.findOne.mockReturnValue(userMockModel);
+    mockSubjectRepository.findOne.mockReturnValue(subjectMockModel);
     mockUserSubjectRepository.getUserSubject.mockReturnValue(null);
 
     const createUserSubjectsService = new CreateUserSubjects(
       mockUserSubjectRepository,
       mockSubjectRepository,
       mockUserRepository,
+      mockUserSubjectToUserSubjectViewMapper,
     );
 
     await createUserSubjectsService.execute({
@@ -69,9 +76,9 @@ describe('CreateUserSubjectsService', () => {
       userId: '123',
     });
 
-    expect(mockUserRepository.findById).toHaveBeenCalledTimes(1);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.getUserSubject).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.create).toHaveBeenCalledTimes(1);
   });
@@ -85,14 +92,15 @@ describe('CreateUserSubjectsService', () => {
       updateDate: new Date(),
     } as SubjectView;
 
-    mockUserRepository.findById.mockReturnValue(null);
-    mockSubjectRepository.findById.mockReturnValue(subjectMockModel);
+    mockUserRepository.findOne.mockReturnValue(null);
+    mockSubjectRepository.findOne.mockReturnValue(subjectMockModel);
     mockUserSubjectRepository.getUserSubject.mockReturnValue(null);
 
     const createUserSubjectsService = new CreateUserSubjects(
       mockUserSubjectRepository,
       mockSubjectRepository,
       mockUserRepository,
+      mockUserSubjectToUserSubjectViewMapper,
     );
 
     await createUserSubjectsService
@@ -107,9 +115,9 @@ describe('CreateUserSubjectsService', () => {
         });
       });
 
-    expect(mockUserRepository.findById).toHaveBeenCalledTimes(1);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(0);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(0);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(0);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(0);
     expect(mockUserSubjectRepository.getUserSubject).toHaveBeenCalledTimes(0);
     expect(mockUserSubjectRepository.create).toHaveBeenCalledTimes(0);
   });
@@ -126,14 +134,15 @@ describe('CreateUserSubjectsService', () => {
       updateDate: new Date(),
     } as UserView;
 
-    mockUserRepository.findById.mockReturnValue(userMockModel);
-    mockSubjectRepository.findById.mockReturnValue(null);
+    mockUserRepository.findOne.mockReturnValue(userMockModel);
+    mockSubjectRepository.findOne.mockReturnValue(null);
     mockUserSubjectRepository.getUserSubject.mockReturnValue(null);
 
     const createUserSubjectsService = new CreateUserSubjects(
       mockUserSubjectRepository,
       mockSubjectRepository,
       mockUserRepository,
+      mockUserSubjectToUserSubjectViewMapper,
     );
 
     await createUserSubjectsService
@@ -148,8 +157,8 @@ describe('CreateUserSubjectsService', () => {
         });
       });
 
-    expect(mockUserRepository.findById).toHaveBeenCalledTimes(1);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.getUserSubject).toHaveBeenCalledTimes(0);
     expect(mockUserSubjectRepository.create).toHaveBeenCalledTimes(0);
   });
@@ -188,8 +197,8 @@ describe('CreateUserSubjectsService', () => {
       update: '2023-08-17T13:23:57.757Z',
     };
 
-    mockUserRepository.findById.mockReturnValue(userMockModel);
-    mockSubjectRepository.findById.mockReturnValue(subjectMockModel);
+    mockUserRepository.findOne.mockReturnValue(userMockModel);
+    mockSubjectRepository.findOne.mockReturnValue(subjectMockModel);
     mockUserSubjectRepository.getUserSubject.mockReturnValue(
       userSubjectMockModel,
     );
@@ -198,6 +207,7 @@ describe('CreateUserSubjectsService', () => {
       mockUserSubjectRepository,
       mockSubjectRepository,
       mockUserRepository,
+      mockUserSubjectToUserSubjectViewMapper,
     );
 
     await createUserSubjectsService
@@ -212,8 +222,8 @@ describe('CreateUserSubjectsService', () => {
         });
       });
 
-    expect(mockUserRepository.findById).toHaveBeenCalledTimes(1);
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findOne).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.getUserSubject).toHaveBeenCalledTimes(1);
     expect(mockUserSubjectRepository.create).toHaveBeenCalledTimes(0);
   });
