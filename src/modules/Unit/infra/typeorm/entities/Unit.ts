@@ -1,18 +1,10 @@
 import Lesson from '@modules/lesson/infra/typeorm/Entities/lesson';
 import { IUnit } from '@modules/unit/domain/IUnit';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import BaseEntity from '@shared/infra/typeorm/entities/BaseEntity';
+import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('unit')
-export default class Unit implements IUnit {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+export default class Unit extends BaseEntity implements IUnit {
   @Column()
   title: string;
   @Column()
@@ -20,9 +12,5 @@ export default class Unit implements IUnit {
   @Column({ type: 'bool', default: true })
   active: boolean;
   @OneToMany(() => Lesson, lesson => lesson.unit)
-  lessons: Lesson[];
-  @CreateDateColumn()
-  create_at: Date;
-  @UpdateDateColumn()
-  update_at: Date;
+  lessons?: Lesson[];
 }

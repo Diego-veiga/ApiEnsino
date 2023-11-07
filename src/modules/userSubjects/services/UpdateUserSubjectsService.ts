@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import ISubjectRepository from '@modules/subjects/domain/respositories/ISubjectsRepository';
-import IUsersRepository from '@modules/users/domain/repositories/IUsersRepository';
+import ISubjectRepository from '@modules/subjects/domain/Repository/ISubjectsRepository';
+import IUsersRepository from '@modules/users/domain/Repository/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IRequestUpdateUserSubjects from '../domain/IRequestUpdateUserSubject';
-import IUpdateUserSubjects from '../domain/IUpdateUserSubjects';
-import IUserSubjectsRepository from '../domain/IUserSubjectsRepository';
+import IRequestUpdateUserSubjects from '../domain/Request/IRequestUpdateUserSubject';
+import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
+import UserSubjects from '../infra/typeorm/entities/userSubject';
+import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+import UserSubjectView from '../domain/View/UserSubjectView';
 
 @injectable()
 export default class UpdateUserSubjectsService {
@@ -16,23 +18,25 @@ export default class UpdateUserSubjectsService {
     private subjectRepository: ISubjectRepository,
     @inject('UserRepository')
     private userRepository: IUsersRepository,
+    @inject('UserSubjectToUserSubjectViewMapper')
+    private userSubjectToUserSubjectViewMapper: IUserSubjectToUserSubjectViewMapper,
   ) {}
   async execute({
     id,
     userId,
     subjectId,
     grade,
-  }: IRequestUpdateUserSubjects): Promise<void> {
-    const userSubjectExist = await this.userSubjectsRepository.getById(id);
+  }: IRequestUpdateUserSubjects): Promise<UserSubjectView> {
+    const userSubjectExist = await this.userSubjectsRepository.findOne(id);
     if (!userSubjectExist) {
       throw new AppError('enrollment not found.', 403);
     }
 
-    const userExist = await this.userRepository.findById(userId);
+    const userExist = await this.userRepository.findOne(userId);
     if (!userExist) {
       throw new AppError('User not found.', 403);
     }
-    const subjectExist = await this.subjectRepository.findById(subjectId);
+    const subjectExist = await this.subjectRepository.findOne(subjectId);
     if (!subjectExist) {
       throw new AppError('Subject not found.', 403);
     }
@@ -45,13 +49,21 @@ export default class UpdateUserSubjectsService {
     if (userWithSubjectExist) {
       throw new AppError('Student already registered for this subject.', 403);
     }
-    const userSubjectUpdateModel: IUpdateUserSubjects = {
+    const userSubjectUpdateModel = {
       id,
       user: userExist,
       subject: subjectExist,
       grade,
-    };
+      subjectId,
+      userId,
+    } as UserSubjects;
 
-    await this.userSubjectsRepository.update(userSubjectUpdateModel);
+    const userSubjectUpdated = await this.userSubjectsRepository.update(
+      userSubjectUpdateModel,
+    );
+
+    return this.userSubjectToUserSubjectViewMapper.mapperUserSubjectToUserSubjectView(
+      userSubjectUpdated,
+    );
   }
 }

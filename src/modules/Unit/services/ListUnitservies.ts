@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import { IUnit } from '../domain/IUnit';
-import IUnitRepository from '../domain/repository/IUnitRepository';
+import IUnitRepository from '../domain/Respository/IUnitRepository';
 
 @injectable()
 export default class ListUnitService {
@@ -10,6 +10,6 @@ export default class ListUnitService {
   ) {}
 
   async execute(): Promise<IUnit[]> {
-    return await this.unitRepository.getAll();
+    return await this.unitRepository.findAll();
   }
 }

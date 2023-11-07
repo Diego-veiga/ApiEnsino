@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { classes } from '@automapper/classes';
 import { createMapper, mapFrom } from '@automapper/core';
+import SubjectView from '@modules/subjects/domain/View/SubjectView';
 import Subject from '@modules/subjects/infra/typeorm/entities/subject';
+import UserView from '@modules/users/domain/View/UserView';
 import User from '@modules/users/infra/typeorm/entities/user';
-import IUserSubjectToUserSubjectViewMapper from '../domain/mappers/IUserSubjectToUserSubjectView';
-import UserSubjectSubjectView from '../domain/UserSubjectSubjectView';
-import UserSubjectUserView from '../domain/UserSubjectUserView';
-import UserSubjectView from '../domain/UserSubjectView';
+import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+
+import UserSubjectView from '../domain/View/UserSubjectView';
 import UserSubjects from '../infra/typeorm/entities/userSubject';
 
 const mapper = createMapper({
@@ -14,13 +15,16 @@ const mapper = createMapper({
   pluginInitializer: classes,
 });
 
-function getUser(user: User): UserSubjectUserView {
+function getUser(user: User): UserView {
   return {
     id: user.id,
     name: user.name,
+    active: user.active,
+    email: user.email,
+    lastName: user.lastName,
   };
 }
-function getSubject(subject: Subject): UserSubjectSubjectView {
+function getSubject(subject: Subject): SubjectView {
   return {
     id: subject.id,
     name: subject.name,

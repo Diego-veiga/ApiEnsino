@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
-import ISubjectRepository from '../domain/respositories/ISubjectsRepository';
-import IUpdateSubject from '../domain/IUpdateSubject';
+import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
+import IUpdateSubject from '../domain/Request/IUpdateSubject';
+import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
+import SubjectView from '../domain/View/SubjectView';
 
 @injectable()
 export default class UpdateSubjectService {
   constructor(
     @inject('SubjectRepository')
     private subjectRepository: ISubjectRepository,
+    @inject('SubjectToSubjectViewMapper')
+    private subjectToSubjectViewMapper: ISubjectToSubjectViewMapper,
   ) {}
 
-  async execute({ id, name, area }: IUpdateSubject): Promise<void> {
-    const subjectExist = await this.subjectRepository.findById(id);
+  async execute({ id, name, area }: IUpdateSubject): Promise<SubjectView> {
+    const subjectExist = await this.subjectRepository.findOne(id);
 
     if (!subjectExist) {
       throw new AppError('Subject does not exist');
@@ -24,11 +28,12 @@ export default class UpdateSubjectService {
         'There is already a subject registered with this name',
       );
     }
+    subjectExist.name = name;
+    subjectExist.area = area;
 
-    await this.subjectRepository.update({
-      id,
-      name,
-      area,
-    });
+    const subjectUpdated = await this.subjectRepository.update(subjectExist);
+    return this.subjectToSubjectViewMapper.mapperSubjectToSubjectView(
+      subjectUpdated,
+    );
   }
 }

@@ -2,7 +2,7 @@
 
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IUnitRepository from '../domain/repository/IUnitRepository';
+import IUnitRepository from '../domain/Respository/IUnitRepository';
 
 @injectable()
 export default class DeleteUnitService {
@@ -11,7 +11,7 @@ export default class DeleteUnitService {
   ) {}
 
   async execute(id: string): Promise<void> {
-    const unitExist = await this.unitRepository.getById(id);
+    const unitExist = await this.unitRepository.findOne(id);
     if (!unitExist) {
       throw new AppError('Unit not found');
     }

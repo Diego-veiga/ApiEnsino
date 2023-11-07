@@ -1,4 +1,4 @@
-import { area } from './enum/area';
+import { area } from '../enum/area';
 
 export interface ICreateSubject {
   name: string;

@@ -1,56 +1,109 @@
 import 'reflect-metadata';
 import ListUserSubjectsService from '@modules/userSubjects/services/ListUserSubjectsService';
+import UserSubjects from '@modules/userSubjects/infra/typeorm/entities/userSubject';
+import { area } from '@modules/subjects/domain/enum/area';
 
 const mockUserSubjectRepository = {
   create: jest.fn(),
-  getUserSubject: jest.fn(),
-  getAll: jest.fn(),
-  getById: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  getAllUserSubject: jest.fn(),
+  getUserSubject: jest.fn(),
+};
+
+const mockUserSubjectToUserSubjectViewMapper = {
+  mapperUserSubjectToUserSubjectView: jest.fn(),
 };
 
 describe('List UserSubject Service', () => {
   it('should list the UserSubject ', async () => {
     const userSubjectList = [
       {
-        id: '71465606-9710-4c5c-b5dc-32d8f6cfba26',
+        id: '123',
+        userId: '456',
+        subjectId: '789',
+        grade: 14,
+        active: true,
         user: {
-          id: '53f8e8e3-7f47-41ac-a92b-dbae32a6cc9b',
-          name: 'diego',
+          id: '147',
+          name: 'teste',
+          lastName: 'string',
+          email: 'teste@teste.com',
+          password: '123456',
+          active: true,
+          create_at: new Date(),
+          update_at: new Date(),
         },
         subject: {
-          id: '9b9b0529-c9fb-4298-809d-daa692923b87',
-          name: 'matamatica',
-          area: 'exact',
+          id: '1',
+          name: 'math',
+          area: area.human,
+          active: true,
+          create_at: new Date(),
+          update_at: new Date(),
         },
-        create: '2023-08-07T23:08:10.644Z',
-        update: '2023-08-17T13:23:57.757Z',
       },
       {
-        id: 'f2635c2f-bf68-469b-87f6-5c3c94f1a8fa',
+        id: '1234',
+        userId: '456',
+        subjectId: '789',
+        grade: 14,
+        active: true,
         user: {
-          id: '53f8e8e3-7f47-41ac-a92b-dbae32a6cc9b',
-          name: 'diego',
+          id: '147',
+          name: 'teste',
+          lastName: 'string',
+          email: 'teste@teste.com',
+          password: '123456',
+          active: true,
+          create_at: new Date(),
+          update_at: new Date(),
         },
         subject: {
-          id: 'c1d4ce95-7425-4af6-a2f6-ff3a98024b08',
-          name: 'Biologia',
-          area: 'human',
+          id: '1',
+          name: 'math',
+          area: area.exact,
+          active: true,
+          create_at: new Date(),
+          update_at: new Date(),
         },
-        create: '2023-08-15T12:53:36.783Z',
-        update: '2023-08-21T14:27:37.868Z',
       },
-    ];
+    ] as UserSubjects[];
 
     const listUserSubjectsService = new ListUserSubjectsService(
       mockUserSubjectRepository,
+      mockUserSubjectToUserSubjectViewMapper,
     );
-    mockUserSubjectRepository.getAll.mockReturnValue(userSubjectList);
+    mockUserSubjectRepository.getAllUserSubject.mockReturnValue(
+      userSubjectList,
+    );
 
-    const result = await listUserSubjectsService.execute();
+    await listUserSubjectsService.execute();
 
-    expect(result).toEqual(userSubjectList);
-    expect(mockUserSubjectRepository.getAll).toHaveBeenCalledTimes(1);
+    expect(mockUserSubjectRepository.getAllUserSubject).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(
+      mockUserSubjectToUserSubjectViewMapper.mapperUserSubjectToUserSubjectView,
+    ).toHaveBeenCalledTimes(2);
+  });
+
+  it('should list the UserSubject empty ', async () => {
+    const listUserSubjectsService = new ListUserSubjectsService(
+      mockUserSubjectRepository,
+      mockUserSubjectToUserSubjectViewMapper,
+    );
+    mockUserSubjectRepository.getAllUserSubject.mockReturnValue([]);
+
+    await listUserSubjectsService.execute();
+
+    expect(mockUserSubjectRepository.getAllUserSubject).toHaveBeenCalledTimes(
+      1,
+    );
+    expect(
+      mockUserSubjectToUserSubjectViewMapper.mapperUserSubjectToUserSubjectView,
+    ).toHaveBeenCalledTimes(0);
   });
 });

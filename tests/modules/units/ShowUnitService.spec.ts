@@ -2,17 +2,18 @@ import 'reflect-metadata';
 import ShowUnitService from '@modules/unit/services/ShowUnitservies';
 
 const mockUnitRepository = {
-  save: jest.fn(),
-  update: jest.fn(),
-  getById: jest.fn(),
-  getAll: jest.fn(),
+  create: jest.fn(),
+  findAll: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
+  update: jest.fn(),
+  findByName: jest.fn(),
 };
 
 describe('ShowUnitService', () => {
   it('should get unit with id', async () => {
     const showUnitService = new ShowUnitService(mockUnitRepository);
-    mockUnitRepository.getById.mockReturnValue({
+    mockUnitRepository.findOne.mockReturnValue({
       id: 'any id',
       title: 'any title',
       explanation: 'any explanation',
@@ -22,6 +23,6 @@ describe('ShowUnitService', () => {
 
     await showUnitService.execute('any id');
 
-    expect(mockUnitRepository.getById).toHaveBeenCalledTimes(1);
+    expect(mockUnitRepository.findOne).toHaveBeenCalledTimes(1);
   });
 });

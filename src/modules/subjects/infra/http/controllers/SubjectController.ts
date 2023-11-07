@@ -11,11 +11,9 @@ export default class SubjectController {
     const { name, area } = request.body;
     const createSubjectService = container.resolve(CreateSubjectService);
 
-    await createSubjectService.execute({ name, area });
+    const subjectCreated = await createSubjectService.execute({ name, area });
 
-    return response
-      .json({ message: 'Subject created successfully' })
-      .status(201);
+    return response.json(subjectCreated).status(201);
   }
 
   async index(request: Request, response: Response): Promise<Response> {
@@ -38,15 +36,13 @@ export default class SubjectController {
     const { id } = request.params;
     const { name, area } = request.body;
 
-    await updateSubjectService.execute({
+    const subjectUpdated = await updateSubjectService.execute({
       id,
       name,
       area,
     });
 
-    return response
-      .json({ message: 'Subject updated successfully' })
-      .status(200);
+    return response.json(subjectUpdated).status(200);
   }
   async delete(request: Request, response: Response): Promise<Response> {
     const deleteSubjectService = container.resolve(DeleteSubjectService);

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IUserSubjectsRepository from '../domain/IUserSubjectsRepository';
+import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
 
 @injectable()
 export default class DeleteUserSubjectsService {
@@ -10,7 +10,7 @@ export default class DeleteUserSubjectsService {
     private userSubjectsRepository: IUserSubjectsRepository,
   ) {}
   async execute(id: string): Promise<void> {
-    const userSubjectExist = await this.userSubjectsRepository.getById(id);
+    const userSubjectExist = await this.userSubjectsRepository.findOne(id);
     if (!userSubjectExist) {
       throw new AppError('enrollment not found');
     }
