@@ -4,23 +4,30 @@ import { AppError } from '@shared/errors/AppError';
 
 const mockUserRepository = {
   create: jest.fn(),
-  delete: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByEmail: jest.fn(),
+  findOne: jest.fn(),
+  delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+  findByEmail: jest.fn(),
 };
 
 const mockRebbit = {
   publishInExchange: jest.fn(),
   start: jest.fn(),
 };
+
+const mockUserToUserViewMapper = {
+  mapperUserToUserView: jest.fn(),
+};
 describe('Create User Service', () => {
   it('Must register the user', async () => {
     const createUserService = new CreateUserService(
       mockUserRepository,
       mockRebbit,
+      mockUserToUserViewMapper,
     );
+
     mockUserRepository.findByEmail.mockReturnValue(null);
     mockRebbit.publishInExchange.mockReturnValue(true);
     mockUserRepository.create.mockReturnValue(true);
@@ -33,8 +40,10 @@ describe('Create User Service', () => {
     });
 
     expect(mockUserRepository.create).toHaveBeenCalledTimes(1);
+    expect(mockUserRepository.findByEmail).toHaveBeenCalledTimes(1);
     expect(mockRebbit.publishInExchange).toHaveBeenCalledTimes(1);
   });
+
   it('user with same email address', async () => {
     const newUser = {
       name: 'abc',
@@ -45,7 +54,9 @@ describe('Create User Service', () => {
     const createUserService = new CreateUserService(
       mockUserRepository,
       mockRebbit,
+      mockUserToUserViewMapper,
     );
+
     mockUserRepository.findByEmail.mockReturnValue(newUser);
 
     expect(createUserService.execute(newUser)).rejects.toBeInstanceOf(AppError);

@@ -6,10 +6,14 @@ import { area } from '@modules/subjects/domain/enum/area';
 const mockSubjectRepository = {
   create: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByName: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
+};
+
+const mockSubjectToSubjectViewMapper = {
+  mapperSubjectToSubjectView: jest.fn(),
 };
 
 describe('Create Subject Service', () => {
@@ -23,15 +27,22 @@ describe('Create Subject Service', () => {
     };
     const createSubjectService = new CreateSubjectService(
       mockSubjectRepository,
+      mockSubjectToSubjectViewMapper,
     );
-    mockSubjectRepository.findByName.mockReturnValue(null);
 
+    mockSubjectRepository.findByName.mockReturnValue(null);
     mockSubjectRepository.create.mockReturnValue(true);
+    mockSubjectToSubjectViewMapper.mapperSubjectToSubjectView.mockReturnValue(
+      subject,
+    );
 
     await createSubjectService.execute(subject);
 
     expect(mockSubjectRepository.findByName).toHaveBeenCalledTimes(1);
     expect(mockSubjectRepository.create).toHaveBeenCalledTimes(1);
+    expect(
+      mockSubjectToSubjectViewMapper.mapperSubjectToSubjectView,
+    ).toHaveBeenCalledTimes(1);
     expect(mockSubjectRepository.create).toBeCalledWith({
       name: 'math',
       area: area.human,
@@ -47,9 +58,13 @@ describe('Create Subject Service', () => {
     };
     const createSubjectService = new CreateSubjectService(
       mockSubjectRepository,
+      mockSubjectToSubjectViewMapper,
     );
     mockSubjectRepository.findByName.mockReturnValue(subject);
     mockSubjectRepository.create.mockReturnValue(true);
+    mockSubjectToSubjectViewMapper.mapperSubjectToSubjectView.mockReturnValue(
+      null,
+    );
 
     await createSubjectService.execute(subject).catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -60,5 +75,8 @@ describe('Create Subject Service', () => {
 
     expect(mockSubjectRepository.findByName).toHaveBeenCalledTimes(1);
     expect(mockSubjectRepository.create).toHaveBeenCalledTimes(0);
+    expect(
+      mockSubjectToSubjectViewMapper.mapperSubjectToSubjectView,
+    ).toHaveBeenCalledTimes(0);
   });
 });

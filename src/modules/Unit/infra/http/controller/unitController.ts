@@ -12,8 +12,8 @@ export default class UnitController {
 
     const createUnitService = container.resolve(CreateUnitService);
 
-    await createUnitService.execute({ title, explanation });
-    return response.status(201).json({ message: 'Unit created' });
+    const unit = await createUnitService.execute({ title, explanation });
+    return response.status(201).json(unit);
   }
 
   async index(request: Request, response: Response): Promise<Response> {

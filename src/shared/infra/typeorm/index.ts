@@ -3,7 +3,8 @@ import Subject from '@modules/subjects/infra/typeorm/entities/subject';
 import Unit from '@modules/unit/infra/typeorm/entities/Unit';
 import User from '@modules/users/infra/typeorm/entities/user';
 import UserSubjects from '@modules/userSubjects/infra/typeorm/entities/userSubject';
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+import path from 'path';
 import { DataSource } from 'typeorm';
 import { CreateUser1682587596261 } from './migrations/1682587596261-CreateUser';
 import { AddActiveColumnUser1683279499546 } from './migrations/1683279499546-addActiveColumnUser';
@@ -13,13 +14,18 @@ import { CreateUnitTable1689761970246 } from './migrations/1689761970246-createU
 import { CreateUserSubject1690888220521 } from './migrations/1690888220521-CreateUserSubject';
 import { CreateLesson1694509633867 } from './migrations/1694509633867-createLesson';
 
+dotenv.config({
+  path: path.join(__dirname, `../../../../.env.${process.env.NODE_ENV}`),
+  override: true,
+});
+
 export const dataSource = new DataSource({
   type: 'postgres',
-  host: process.env.HOST_DATABASE || 'localhost',
-  port: Number(process.env.PORT_DATABASE) || 5432,
-  username: process.env.USERNAME_DATABASE || 'postgres',
-  password: process.env.PASSWORD_DATABASE || '1234',
-  database: process.env.DATABASE || 'ApiEnsino',
+  host: process.env.HOST_DATABASE,
+  port: Number(process.env.PORT_DATABASE),
+  username: process.env.USERNAME_DATABASE,
+  password: process.env.PASSWORD_DATABASE,
+  database: process.env.DATABASE,
   entities: [User, Subject, Unit, UserSubjects, Lesson],
   logging: true,
   migrations: [

@@ -10,8 +10,11 @@ export default class UserSubjectsController {
   async create(request: Request, response: Response): Promise<Response> {
     const { userId, subjectId } = request.body;
     const userSubjectsService = container.resolve(CreateUserSubjects);
-    await userSubjectsService.execute({ userId, subjectId });
-    return response.status(201).json({ message: 'Enrollment successful' });
+    const userSubjectCreated = await userSubjectsService.execute({
+      userId,
+      subjectId,
+    });
+    return response.status(201).json(userSubjectCreated);
   }
 
   async show(request: Request, response: Response): Promise<Response> {
@@ -37,10 +40,13 @@ export default class UserSubjectsController {
     const updateUserSubjectsService = container.resolve(
       UpdateUserSubjectsService,
     );
-    await updateUserSubjectsService.execute({ id, userId, subjectId, grade });
-    return response
-      .status(201)
-      .json({ message: 'UserSubject successfully updated' });
+    const userSubjectUpdated = await updateUserSubjectsService.execute({
+      id,
+      userId,
+      subjectId,
+      grade,
+    });
+    return response.status(201).json(userSubjectUpdated);
   }
 
   async delete(request: Request, response: Response): Promise<Response> {

@@ -11,9 +11,14 @@ export default class UserController {
     const { name, lastName, email, password } = request.body;
     const createUserService = container.resolve(CreateUserService);
 
-    await createUserService.execute({ name, lastName, email, password });
+    const userCreated = await createUserService.execute({
+      name,
+      lastName,
+      email,
+      password,
+    });
 
-    return response.json({ message: 'user created successfully ' }).status(201);
+    return response.json(userCreated).status(201);
   }
 
   async index(request: Request, response: Response): Promise<Response> {

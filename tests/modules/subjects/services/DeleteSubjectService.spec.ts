@@ -6,10 +6,10 @@ import DeleteSubjectService from '@modules/subjects/services/DeleteSubjectServic
 const mockSubjectRepository = {
   create: jest.fn(),
   findAll: jest.fn(),
-  findById: jest.fn(),
-  findByName: jest.fn(),
+  findOne: jest.fn(),
   delete: jest.fn(),
   update: jest.fn(),
+  findByName: jest.fn(),
 };
 
 describe('Delete Subject Service', () => {
@@ -24,20 +24,21 @@ describe('Delete Subject Service', () => {
     const deleteSubjectService = new DeleteSubjectService(
       mockSubjectRepository,
     );
-    mockSubjectRepository.findById.mockReturnValue(subject);
+    mockSubjectRepository.findOne.mockReturnValue(subject);
 
     mockSubjectRepository.delete.mockReturnValue(true);
 
     await deleteSubjectService.execute('1');
 
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockSubjectRepository.delete).toHaveBeenCalledTimes(1);
   });
+
   it('trying to delete a non-existent user', async () => {
     const deleteSubjectService = new DeleteSubjectService(
       mockSubjectRepository,
     );
-    mockSubjectRepository.findById.mockReturnValue(null);
+    mockSubjectRepository.findOne.mockReturnValue(null);
 
     await deleteSubjectService.execute('1').catch(e => {
       expect(e).toBeInstanceOf(AppError);
@@ -46,7 +47,7 @@ describe('Delete Subject Service', () => {
       });
     });
 
-    expect(mockSubjectRepository.findById).toHaveBeenCalledTimes(1);
+    expect(mockSubjectRepository.findOne).toHaveBeenCalledTimes(1);
     expect(mockSubjectRepository.delete).toHaveBeenCalledTimes(0);
   });
 });
