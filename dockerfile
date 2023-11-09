@@ -1,5 +1,6 @@
 FROM node:16-alpine
 WORKDIR /src/app
+ENV NODE_ENV=stage
 COPY package*.json ./
 RUN npm install
 COPY . .
