@@ -4,7 +4,7 @@ import { AppError } from '@shared/errors/AppError';
 import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import ICreateSubject from '../domain/Request/ICreateSubject';
 import Subject from '../infra/typeorm/entities/subject';
-import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
+import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';
 import SubjectView from '../domain/View/SubjectView';
 
 @injectable()
@@ -14,7 +14,7 @@ export default class CreateSubjectService {
     private subjectRepository: ISubjectRepository,
     @inject('SubjectToSubjectViewMapper')
     private subjectToSubjectViewMapper: ISubjectToSubjectViewMapper,
-  ) {}
+  ) { }
 
   async execute({ name, area }: ICreateSubject): Promise<SubjectView> {
     const subjectExists = await this.subjectRepository.findByName(name);

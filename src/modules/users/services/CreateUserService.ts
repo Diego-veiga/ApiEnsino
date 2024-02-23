@@ -19,7 +19,7 @@ export default class CreateUserService {
     private Rebbit: IRebbit,
     @inject('UserToUserViewMapper')
     private userToUserViewMapper: IUserToUserViewMapper,
-  ) {}
+  ) { }
 
   async execute({
     name,

@@ -8,7 +8,7 @@ export default class DeleteSubjectService {
   constructor(
     @inject('SubjectRepository')
     private subjectRepository: ISubjectRepository,
-  ) {}
+  ) { }
 
   async execute(id: string): Promise<void> {
     const subjectExist = await this.subjectRepository.findOne(id);

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
-import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+import IUserSubjectToUserSubjectViewMapper from '@modules/userSubjects/domain/mappers/IUserSubjectToUserSubjectView';
 import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
 import UserSubjectView from '../domain/View/UserSubjectView';
 

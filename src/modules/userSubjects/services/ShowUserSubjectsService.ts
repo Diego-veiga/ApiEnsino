@@ -4,7 +4,7 @@ import { inject, injectable } from 'tsyringe';
 import IRequestShowUserSubjects from '../domain/Request/IRequestShowUserSubjects';
 import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
 import UserSubjectView from '../domain/View/UserSubjectView';
-import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+import IUserSubjectToUserSubjectViewMapper from '@modules/userSubjects/domain/mappers/IUserSubjectToUserSubjectView';
 
 @injectable()
 export default class ShowUserSubjectsService {
@@ -13,7 +13,7 @@ export default class ShowUserSubjectsService {
     private userSubjectsRepository: IUserSubjectsRepository,
     @inject('UserSubjectToUserSubjectViewMapper')
     private userSubjectToUserSubjectViewMapper: IUserSubjectToUserSubjectViewMapper,
-  ) {}
+  ) { }
   async execute({
     userId,
     subjectId,

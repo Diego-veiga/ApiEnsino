@@ -14,7 +14,7 @@ export default class UpdateUserService {
     private userRepository: IUsersRepository,
     @inject('UserToUserViewMapper')
     private userToUserViewMapper: IUserToUserViewMapper,
-  ) {}
+  ) { }
 
   async execute({
     id,

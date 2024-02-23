@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
-import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
+import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';
 import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import SubjectView from '../domain/View/SubjectView';
 
@@ -11,7 +11,7 @@ export default class ListSubjectService {
     private subjectRepository: ISubjectRepository,
     @inject('SubjectToSubjectViewMapper')
     private subjectToSubjectViewMapper: ISubjectToSubjectViewMapper,
-  ) {}
+  ) { }
 
   async execute(): Promise<SubjectView[]> {
     const subjectView: SubjectView[] = [];

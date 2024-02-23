@@ -8,7 +8,7 @@ export default class DeleteUserService {
   constructor(
     @inject('UserRepository')
     private userRepository: IUsersRepository,
-  ) {}
+  ) { }
 
   async execute(id: string): Promise<void> {
     const userExist = await this.userRepository.findOne(id);

@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe';
 import IRequestUpdateUserSubjects from '../domain/Request/IRequestUpdateUserSubject';
 import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
 import UserSubjects from '../infra/typeorm/entities/userSubject';
-import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+import IUserSubjectToUserSubjectViewMapper from '@modules/userSubjects/domain/mappers/IUserSubjectToUserSubjectView';
 import UserSubjectView from '../domain/View/UserSubjectView';
 
 @injectable()
@@ -20,7 +20,7 @@ export default class UpdateUserSubjectsService {
     private userRepository: IUsersRepository,
     @inject('UserSubjectToUserSubjectViewMapper')
     private userSubjectToUserSubjectViewMapper: IUserSubjectToUserSubjectViewMapper,
-  ) {}
+  ) { }
   async execute({
     id,
     userId,

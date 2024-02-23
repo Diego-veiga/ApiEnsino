@@ -5,7 +5,7 @@ import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IRequestCreateUserSubjects from '../domain/Request/IRequestCreateUserSubjects';
 import IUserSubjectsRepository from '../domain/Repository/IUserSubjectsRepository';
-import IUserSubjectToUserSubjectViewMapper from '../domain/Mappers/IUserSubjectToUserSubjectView';
+import IUserSubjectToUserSubjectViewMapper from '@modules/userSubjects/domain/mappers/IUserSubjectToUserSubjectView';
 import UserSubjectView from '../domain/View/UserSubjectView';
 import UserSubjects from '../infra/typeorm/entities/userSubject';
 
@@ -20,7 +20,7 @@ export default class CreateUserSubjects {
     private userRepository: IUsersRepository,
     @inject('UserSubjectToUserSubjectViewMapper')
     private userSubjectToUserSubjectViewMapper: IUserSubjectToUserSubjectViewMapper,
-  ) {}
+  ) { }
   async execute({
     subjectId,
     userId,

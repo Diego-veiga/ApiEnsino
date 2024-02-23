@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import { AppError } from '@shared/errors/AppError';
 import ISubjectRepository from '../domain/Repository/ISubjectsRepository';
 import IUpdateSubject from '../domain/Request/IUpdateSubject';
-import ISubjectToSubjectViewMapper from '../domain/Mappers/ISubjectToSubjectView.mapper';
+import ISubjectToSubjectViewMapper from '@modules/subjects/domain/mappers/ISubjectToSubjectView.mapper';
 import SubjectView from '../domain/View/SubjectView';
 
 @injectable()
@@ -13,7 +13,7 @@ export default class UpdateSubjectService {
     private subjectRepository: ISubjectRepository,
     @inject('SubjectToSubjectViewMapper')
     private subjectToSubjectViewMapper: ISubjectToSubjectViewMapper,
-  ) {}
+  ) { }
 
   async execute({ id, name, area }: IUpdateSubject): Promise<SubjectView> {
     const subjectExist = await this.subjectRepository.findOne(id);
