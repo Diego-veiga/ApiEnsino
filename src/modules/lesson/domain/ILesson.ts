@@ -1,4 +1,4 @@
-import Unit from '@modules/unit/infra/typeorm/entities/Unit';
+import Unit from '@modules/Unit/infra/typeorm/entities/Unit';
 
 export default interface ILesson {
   description: string;

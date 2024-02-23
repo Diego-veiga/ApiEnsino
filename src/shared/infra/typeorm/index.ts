@@ -1,6 +1,6 @@
 import Lesson from '@modules/lesson/infra/typeorm/Entities/lesson';
 import Subject from '@modules/subjects/infra/typeorm/entities/subject';
-import Unit from '@modules/unit/infra/typeorm/entities/Unit';
+import Unit from '@modules/Unit/infra/typeorm/entities/Unit';
 import User from '@modules/users/infra/typeorm/entities/user';
 import UserSubjects from '@modules/userSubjects/infra/typeorm/entities/userSubject';
 import * as dotenv from 'dotenv';

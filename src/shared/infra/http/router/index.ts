@@ -1,6 +1,6 @@
 import lessonRouter from '@modules/lesson/infra/http/router/lesson.router';
 import subjectRouter from '@modules/subjects/infra/http/router/subject.router';
-import unitRouter from '@modules/unit/infra/http/router/unit.router';
+import unitRouter from '@modules/Unit/infra/http/router/unit.router';
 import userRouter from '@modules/users/infra/http/router/user.router';
 import userSubjectsRouter from '@modules/userSubjects/infra/http/router/userSubjects.router';
 import { Router } from 'express';

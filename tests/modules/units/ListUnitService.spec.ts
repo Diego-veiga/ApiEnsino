@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import ListUnitService from '@modules/unit/services/ListUnitservies';
+import ListUnitService from '@modules/Unit/services/ListUnitservies';
 
 const mockUnitRepository = {
   create: jest.fn(),

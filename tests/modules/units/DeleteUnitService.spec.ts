@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import DeleteUnitService from '@modules/unit/services/DeleteUnitservies';
+import DeleteUnitService from '@modules/Unit/services/DeleteUnitservies';
 import { AppError } from '@shared/errors/AppError';
 
 const mockUnitRepository = {

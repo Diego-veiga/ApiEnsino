@@ -1,5 +1,5 @@
+import { IUnit } from '@modules/Unit/domain/IUnit';
 import Lesson from '@modules/lesson/infra/typeorm/Entities/lesson';
-import { IUnit } from '@modules/unit/domain/IUnit';
 import BaseEntity from '@shared/infra/typeorm/entities/BaseEntity';
 import { Column, Entity, OneToMany } from 'typeorm';
 

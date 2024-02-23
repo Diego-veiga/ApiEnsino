@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import ShowUnitService from '@modules/unit/services/ShowUnitservies';
+import ShowUnitService from '@modules/Unit/services/ShowUnitservies';
 
 const mockUnitRepository = {
   create: jest.fn(),

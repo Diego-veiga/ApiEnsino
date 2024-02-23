@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import IUnitRepository from '@modules/unit/domain/Respository/IUnitRepository';
+import IUnitRepository from '@modules/Unit/domain/Respository/IUnitRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IUpdateLessonRequest from '../domain/Request/IUpdateLessonRequest';
@@ -15,7 +15,7 @@ export default class UpdateLessonService {
     @inject('UnitRepository') private unitRepository: IUnitRepository,
     @inject('LessonToLessonViewMapper')
     private lessonToLessonViewMapper: ILessonToLessonViewMapper,
-  ) {}
+  ) { }
 
   async execute({
     id,

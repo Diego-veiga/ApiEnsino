@@ -6,8 +6,8 @@ import ISubjectToSubjectViewMapper from '@modules/subjects/domain/Mappers/ISubje
 import ISubjectRepository from '@modules/subjects/domain/Repository/ISubjectsRepository';
 import SubjectsRepository from '@modules/subjects/infra/typeorm/repository/SubjectsRepository';
 import { SubjectToSubjectViewMapper } from '@modules/subjects/mappers/SubjectToSubjectView.mappper';
-import IUnitRepository from '@modules/unit/domain/Respository/IUnitRepository';
-import UnitRepository from '@modules/unit/infra/typeorm/repository/UnitRepository';
+import IUnitRepository from '@modules/Unit/domain/Respository/IUnitRepository';
+import UnitRepository from '@modules/Unit/infra/typeorm/repository/UnitRepository';
 import IUserToUserViewMapper from '@modules/users/domain/mappers/IUserToUserView.mapper';
 import IUsersRepository from '@modules/users/domain/Repository/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/respositories/UsersRepository';
