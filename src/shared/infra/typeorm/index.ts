@@ -26,7 +26,6 @@ export const dataSource = new DataSource({
   username: process.env.USERNAME_DATABASE,
   password: process.env.PASSWORD_DATABASE,
   database: process.env.DATABASE,
-  ssl: true,
   entities: [User, Subject, Unit, UserSubjects, Lesson],
   logging: true,
   migrations: [
