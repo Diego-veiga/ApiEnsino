@@ -27,6 +27,9 @@ export const dataSource = new DataSource({
   password: process.env.PASSWORD_DATABASE,
   database: process.env.DATABASE,
   entities: [User, Subject, Unit, UserSubjects, Lesson],
+  ssl: {
+    rejectUnauthorized: false,
+  },
   logging: true,
   migrations: [
     CreateUser1682587596261,
