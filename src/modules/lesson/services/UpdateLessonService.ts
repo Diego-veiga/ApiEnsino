@@ -3,9 +3,8 @@ import IUnitRepository from '@modules/Unit/domain/Respository/IUnitRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IUpdateLessonRequest from '../domain/Request/IUpdateLessonRequest';
-import ILessonRepository from '../domain/Repository/ILessonRepository';
-import Lesson from '../infra/typeorm/Entities/lesson';
-import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
+import ILessonToLessonViewMapper from '@modules/lesson/domain/mappers/ILessonToLessonViewMapper';
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 import LessonView from '../domain/View/LessonView';
 
 @injectable()

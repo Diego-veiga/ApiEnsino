@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import ILessonRepository from '../domain/Repository/ILessonRepository';
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 
 @injectable()
 export default class DeleteLessonService {
   constructor(
     @inject('LessonRepository') private lessonRepository: ILessonRepository,
-  ) {}
+  ) { }
   async execute(id: string): Promise<void> {
     const lessonExist = await this.lessonRepository.findOne(id);
 

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { inject, injectable } from 'tsyringe';
 import LessonView from '../domain/View/LessonView';
-import ILessonRepository from '../domain/Repository/ILessonRepository';
-import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
+import ILessonToLessonViewMapper from '@modules/lesson/domain/mappers/ILessonToLessonViewMapper';
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 
 @injectable()
 export default class ListLessonService {
@@ -10,7 +10,7 @@ export default class ListLessonService {
     @inject('LessonRepository') private lessonRepository: ILessonRepository,
     @inject('LessonToLessonViewMapper')
     private lessonToLessonViewMapper: ILessonToLessonViewMapper,
-  ) {}
+  ) { }
   async execute(): Promise<LessonView[]> {
     const lessonsView: LessonView[] = [];
     const lessonsData = await this.lessonRepository.findAll();

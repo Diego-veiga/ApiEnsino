@@ -2,8 +2,8 @@
 import IUnitRepository from '@modules/Unit/domain/Respository/IUnitRepository';
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
-import ILessonRepository from '../domain/Repository/ILessonRepository';
+import ILessonToLessonViewMapper from '@modules/lesson/domain/mappers/ILessonToLessonViewMapper';
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 import IRequestCreateLesson from '../domain/Request/IRequestCreateLesson';
 import LessonView from '../domain/View/LessonView';
 import Lesson from '../infra/typeorm/Entities/lesson';

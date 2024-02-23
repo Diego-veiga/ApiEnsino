@@ -2,8 +2,8 @@
 import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import LessonView from '../domain/View/LessonView';
-import ILessonRepository from '../domain/Repository/ILessonRepository';
-import ILessonToLessonViewMapper from '../domain/Mappers/ILessonToLessonViewMapper';
+import ILessonToLessonViewMapper from '@modules/lesson/domain/mappers/ILessonToLessonViewMapper';
+import ILessonRepository from '@modules/lesson/domain/repository/ILessonRepository';
 
 @injectable()
 export default class ShowLessonService {
