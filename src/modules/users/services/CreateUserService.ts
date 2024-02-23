@@ -47,11 +47,11 @@ export default class CreateUserService {
 
     const userCreated = await this.userRepository.create(user);
 
-    // await this.Rebbit.publishInExchange(
-    //   'amq.direct',
-    //   'newUser',
-    //   JSON.stringify(userCreated),
-    );
+    // // await this.Rebbit.publishInExchange(
+    // //   'amq.direct',
+    // //   'newUser',
+    // //   JSON.stringify(userCreated),
+    // );
     return this.userToUserViewMapper.mapperUserToUserView(userCreated);
   }
 }
